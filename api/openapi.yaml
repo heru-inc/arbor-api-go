@@ -2965,14 +2965,14 @@ components:
       description: A paginated list of app versions.
       example:
         data:
-        - code: code
+        - code: 0
           size: size
           added: 2021-01-01T00:00:00Z
           downloadUrl: downloadUrl
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           version: 2.0.0-prealpha+328
           status: null
-        - code: code
+        - code: 0
           size: size
           added: 2021-01-01T00:00:00Z
           downloadUrl: downloadUrl
@@ -3312,7 +3312,7 @@ components:
     AppVersion:
       description: Represents an uploaded version of an app in your content library.
       example:
-        code: code
+        code: 0
         size: size
         added: 2021-01-01T00:00:00Z
         downloadUrl: downloadUrl
@@ -3329,7 +3329,7 @@ components:
           type: string
         code:
           nullable: true
-          type: string
+          type: integer
         size:
           nullable: true
           type: string
@@ -3604,7 +3604,7 @@ components:
         with the current app version that is assigned to it.
       example:
         version:
-          code: code
+          code: 0
           size: size
           added: 2021-01-01T00:00:00Z
           downloadUrl: downloadUrl

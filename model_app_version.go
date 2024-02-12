@@ -24,7 +24,7 @@ var _ MappedNullable = &AppVersion{}
 type AppVersion struct {
 	Id string `json:"id"`
 	Version string `json:"version"`
-	Code NullableString `json:"code,omitempty"`
+	Code NullableInt32 `json:"code,omitempty"`
 	Size NullableString `json:"size,omitempty"`
 	Added time.Time `json:"added"`
 	Status AppVersionStatus `json:"status"`
@@ -103,9 +103,9 @@ func (o *AppVersion) SetVersion(v string) {
 }
 
 // GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AppVersion) GetCode() string {
+func (o *AppVersion) GetCode() int32 {
 	if o == nil || IsNil(o.Code.Get()) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.Code.Get()
@@ -114,7 +114,7 @@ func (o *AppVersion) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AppVersion) GetCodeOk() (*string, bool) {
+func (o *AppVersion) GetCodeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,8 +130,8 @@ func (o *AppVersion) HasCode() bool {
 	return false
 }
 
-// SetCode gets a reference to the given NullableString and assigns it to the Code field.
-func (o *AppVersion) SetCode(v string) {
+// SetCode gets a reference to the given NullableInt32 and assigns it to the Code field.
+func (o *AppVersion) SetCode(v int32) {
 	o.Code.Set(&v)
 }
 // SetCodeNil sets the value for Code to be an explicit nil

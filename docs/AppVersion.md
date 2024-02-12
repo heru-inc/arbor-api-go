@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **Version** | **string** |  | 
-**Code** | Pointer to **NullableString** |  | [optional] 
+**Code** | Pointer to **NullableInt32** |  | [optional] 
 **Size** | Pointer to **NullableString** |  | [optional] 
 **Added** | **time.Time** |  | 
 **Status** | [**AppVersionStatus**](AppVersionStatus.md) |  | 
@@ -73,20 +73,20 @@ SetVersion sets Version field to given value.
 
 ### GetCode
 
-`func (o *AppVersion) GetCode() string`
+`func (o *AppVersion) GetCode() int32`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *AppVersion) GetCodeOk() (*string, bool)`
+`func (o *AppVersion) GetCodeOk() (*int32, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *AppVersion) SetCode(v string)`
+`func (o *AppVersion) SetCode(v int32)`
 
 SetCode sets Code field to given value.
 

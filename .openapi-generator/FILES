@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -117,10 +116,4 @@ model_update_release_channel_validation_error_body.go
 model_update_release_channel_validation_error_body_errors.go
 model_versions_response.go
 response.go
-test/api_api_info_test.go
-test/api_apps_test.go
-test/api_device_groups_test.go
-test/api_device_models_test.go
-test/api_devices_test.go
-test/api_files_test.go
 utils.go
