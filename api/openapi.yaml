@@ -1,0 +1,3718 @@
+openapi: 3.0.1
+info:
+  description: This API provides a RESTful interface to interact with your organization's
+    data.
+  title: arborxr-api-v2
+  version: ""
+servers:
+- description: Production
+  url: https://api.xrdm.app/api/v2
+- description: Staging
+  url: https://api.xrdm.dev/api/v2
+- description: Local
+  url: https://api.xrdm.docker/api/v2
+paths:
+  /:
+    get:
+      description: Get info about the API.
+      operationId: aPIInfo_info
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootResponse'
+          description: ""
+      tags:
+      - APIInfo
+  /apps:
+    get:
+      description: Get a paginated list of apps.
+      operationId: apps_apps
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                      title: Truck Driving Simulator
+                      description: Learn how to drive big rigs.
+                      tags:
+                      - training
+                      - trucking
+                      - driving
+                      deviceModels:
+                      - id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+                        name: Meta Quest 3
+                        manufacturer: Meta
+                      - id: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+                        name: Meta Quest Pro
+                        manufacturer: Meta
+                      - id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                        name: Pico Neo 3
+                        manufacturer: Pico
+                    - id: 1bd91c75-f385-4644-a94d-102edee94a5f
+                      title: Warehouse Equipment Safety
+                      description: Learn how to operate a forklift and other warehouse
+                        equipment.
+                      tags:
+                      - forklift
+                      - warehouse
+                      - trash compactor
+                      - safety
+                      - training
+                      deviceModels:
+                      - id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+                        name: Meta Quest 3
+                        manufacturer: Meta
+                      - id: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+                        name: Meta Quest Pro
+                        manufacturer: Meta
+                    links:
+                      first: https://api.xrdm.app/api/v2/apps?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/apps?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/apps?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/apps?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/apps?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/apps?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/apps
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/AppsResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}:
+    get:
+      description: Get an app by id.
+      operationId: apps_app
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: db163242-cc1a-48ff-a6b1-db3415ea60e2
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example4:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                    title: Truck Driving Simulator
+                    description: Learn how to drive big rigs.
+                    tags:
+                    - training
+                    - trucking
+                    - driving
+                    deviceModels:
+                    - id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+                      name: Meta Quest 3
+                      manufacturer: Meta
+                    - id: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+                      name: Meta Quest Pro
+                      manufacturer: Meta
+                    - id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                      name: Pico Neo 3
+                      manufacturer: Pico
+                Example2:
+                  value:
+                    id: db163242-cc1a-48ff-a6b1-db3415ea60e2
+                    title: My App
+                    description: My app description.
+                    tags: []
+                    deviceModels:
+                    - id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                      name: Pico Neo 3
+                      manufacturer: Pico
+              schema:
+                $ref: '#/components/schemas/AppWithDeviceModels'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+    put:
+      description: Update an app by id.
+      operationId: apps_updateApp
+      parameters:
+      - examples:
+          Example1:
+            value: db163242-cc1a-48ff-a6b1-db3415ea60e2
+          Example2:
+            value: db163242-cc1a-48ff-a6b1-db3415ea60e2
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example4:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example5:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example6:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  title: My App
+                  description: My app description.
+                  tags:
+                  - tag1
+                  - tag2
+              Example2:
+                value:
+                  tags: []
+              Example3:
+                value:
+                  title: My App
+                  description: My app description.
+                  tags:
+                  - tag1
+                  - tag2
+              Example4:
+                value:
+                  title: My App
+                  description: My app description.
+                  tags:
+                  - tag1
+                  - tag2
+              Example5:
+                value:
+                  title: ""
+                  description: ""
+                  tags: []
+              Example6:
+                value:
+                  title: ""
+                  description: ""
+                  tags: []
+            schema:
+              $ref: '#/components/schemas/apps_updateApp_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: db163242-cc1a-48ff-a6b1-db3415ea60e2
+                    title: My App
+                    description: My app description.
+                    tags:
+                    - tag1
+                    - tag2
+                    deviceModels:
+                    - id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                      name: Pico Neo 3
+                      manufacturer: Pico
+                Example2:
+                  value:
+                    id: db163242-cc1a-48ff-a6b1-db3415ea60e2
+                    title: My App
+                    description: My app description.
+                    tags: []
+                    deviceModels:
+                    - id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                      name: Pico Neo 3
+                      manufacturer: Pico
+              schema:
+                $ref: '#/components/schemas/AppWithDeviceModels'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The title must be a string. (and 2 more errors)
+                    errors:
+                      title:
+                      - The title must be a string.
+                      description:
+                      - The description must be a string.
+                      tags:
+                      - The tags must be an array.
+                Example2:
+                  value:
+                    message: The tags.0 must be a string. (and 1 more error)
+                    errors:
+                      tags.0:
+                      - The tags.0 must be a string.
+                      tags.1:
+                      - The tags.1 must be a string.
+              schema:
+                $ref: '#/components/schemas/UpdateAppValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/versions:
+    get:
+      description: Get a paginated list of versions for an app.
+      operationId: apps_versions
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example3:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 10
+          Example2:
+            value: 10
+          Example3:
+            value: 10
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+          Example2:
+            value: 1
+          Example3:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                      version: 2.0.0-prealpha+328
+                      code: "328"
+                      size: null
+                      added: 2021-01-01T00:00:00.000Z
+                      status: PENDING
+                      downloadUrl: null
+                    - id: d9c08aa9-851a-4e80-9361-76e428d181d7
+                      version: 1.0.0
+                      code: "1"
+                      size: 492 MB
+                      added: 2022-02-02T00:00:00.000Z
+                      status: AVAILABLE
+                      downloadUrl: https://storage.bucket.arborxr.com/path/to/file.apk
+                    - id: 81ec530f-61f3-4fe3-9842-7517c050062c
+                      version: 2.0.0
+                      code: "2"
+                      size: null
+                      added: 2023-03-03T00:00:00.000Z
+                      status: ERROR
+                      downloadUrl: null
+                    links:
+                      first: https://api.xrdm.app/api/v2/apps/9d6a9043-e469-4239-9cc5-147fb20905d9/versions?per_page=10&page=1
+                      last: https://api.xrdm.app/api/v2/apps/9d6a9043-e469-4239-9cc5-147fb20905d9/versions?per_page=10&page=1
+                      prev: null
+                      next: null
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 1
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/apps/9d6a9043-e469-4239-9cc5-147fb20905d9/versions?per_page=10&page=1
+                        label: "1"
+                        active: true
+                      - url: null
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/apps/9d6a9043-e469-4239-9cc5-147fb20905d9/versions
+                      per_page: 10
+                      to: 3
+                      total: 3
+              schema:
+                $ref: '#/components/schemas/VersionsResponse'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+    post:
+      description: Initiate a multipart upload for a new version of an app.
+      operationId: apps_startVersionUpload
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example4:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example5:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example6:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example7:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example8:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  filename: MyApp-v1.apk
+              Example2:
+                value:
+                  filename: MyApp-v2.apk
+                  releaseChannelId: c8136a97-f4c4-451b-b35a-41a2f5014777
+              Example3:
+                value:
+                  filename: MyApp-v1.apk
+              Example4:
+                value:
+                  filename: MyApp-v1.apk
+              Example5:
+                value:
+                  filename: ""
+              Example6:
+                value:
+                  filename: ""
+              Example7:
+                value:
+                  filename: ""
+              Example8:
+                value:
+                  filename: ""
+            schema:
+              $ref: '#/components/schemas/apps_startVersionUpload_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    uploadId: ABC1234567890
+                    key: path/to/MyApp.apk
+                    versionId: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+                Example2:
+                  value:
+                    uploadId: XYZ0987654321
+                    key: path/to/MyApp-v2.apk
+                    versionId: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+              schema:
+                $ref: '#/components/schemas/StartVersionUploadResponse'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The filename field is required. (and 1 more error)
+                    errors:
+                      filename:
+                      - The filename field is required.
+                      releaseChannelId:
+                      - The release channel id must be a valid UUID.
+                Example2:
+                  value:
+                    message: The filename must be a string.
+                    errors:
+                      filename:
+                      - The filename must be a string.
+                Example3:
+                  value:
+                    message: "The filename must end with one of the following: .zip,\
+                      \ .apk."
+                    errors:
+                      filename:
+                      - "The filename must end with one of the following: .zip, .apk."
+                Example4:
+                  value:
+                    message: The release channel id must be a valid UUID.
+                    errors:
+                      releaseChannelId:
+                      - The release channel id must be a valid UUID.
+              schema:
+                $ref: '#/components/schemas/StartUploadAppVersionValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/versions/{versionId}/pre-sign:
+    post:
+      description: Get a pre-signed upload url for a chunk of a multipart upload.
+      operationId: apps_preSignVersionUploadUrl
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example4:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example5:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example6:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example7:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example8:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example2:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example3:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example4:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example5:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example6:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example7:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example8:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+        explode: false
+        in: path
+        name: versionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  partNumbers:
+                  - 1
+                  - 2
+                  - 3
+              Example2:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  partNumbers:
+                  - 1
+                  - 2
+                  - 3
+              Example3:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  partNumbers:
+                  - 1
+                  - 2
+                  - 3
+              Example4:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  partNumbers:
+                  - 1
+                  - 2
+                  - 3
+              Example5:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  partNumbers:
+                  - 1
+                  - 2
+                  - 3
+              Example6:
+                value:
+                  key: ""
+                  uploadId: ""
+                  partNumbers: []
+              Example7:
+                value:
+                  key: ""
+                  uploadId: ""
+                  partNumbers: []
+              Example8:
+                value:
+                  key: ""
+                  uploadId: ""
+                  partNumbers: []
+            schema:
+              $ref: '#/components/schemas/apps_preSignVersionUploadUrl_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                  - partNumber: 1
+                    presignedUrl: https://storage.bucket.arborxr.com/ABC1234567890?partNumber=1&uploadId=ABC1234567890&key=path/to/MyApp.apk
+                  - partNumber: 2
+                    presignedUrl: https://storage.bucket.arborxr.com/ABC1234567890?partNumber=2&uploadId=ABC1234567890&key=path/to/MyApp.apk
+                  - partNumber: 3
+                    presignedUrl: https://storage.bucket.arborxr.com/ABC1234567890?partNumber=3&uploadId=ABC1234567890&key=path/to/MyApp.apk
+              schema:
+                items:
+                  $ref: '#/components/schemas/PreSignVersionUploadUrlResponsePart'
+                type: array
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Cannot upload parts for a version that is not in the
+                      pending state.
+                Example2:
+                  value:
+                    message: Cannot upload parts for a version that is not associated
+                      with the app.
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The key field is required. (and 2 more errors)
+                    errors:
+                      key:
+                      - The key field is required.
+                      uploadId:
+                      - The upload id field is required.
+                      partNumbers:
+                      - The part numbers field is required.
+                Example2:
+                  value:
+                    message: The key must be a string. (and 2 more errors)
+                    errors:
+                      key:
+                      - The key must be a string.
+                      uploadId:
+                      - The upload id must be a string.
+                      partNumbers:
+                      - The part numbers must be an array.
+                Example3:
+                  value:
+                    message: The partNumbers.1 must be an integer. (and 1 more error)
+                    errors:
+                      partNumbers.0:
+                      - The partNumbers.0 must be an integer.
+                      partNumbers.1:
+                      - The partNumbers.1 must be an integer.
+              schema:
+                $ref: '#/components/schemas/PresignUploadAppVersionValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/versions/{versionId}/complete:
+    post:
+      description: Complete a multipart upload for a new version of an app.
+      operationId: apps_completeVersionUpload
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example4:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example5:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example6:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example7:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example8:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example9:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example10:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example2:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example3:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example4:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example5:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example6:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example7:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example8:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example9:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          Example10:
+            value: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+        explode: false
+        in: path
+        name: versionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts:
+                  - partNumber: 1
+                    eTag: ABC1234567890
+                  - partNumber: 2
+                    eTag: XYZ0987654321
+                  - partNumber: 3
+                    eTag: 1234567890ABC
+                  versionName: 1.0.0
+                  releaseNotes: Initial release.
+              Example2:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example3:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example4:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example5:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example6:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example7:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example8:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example9:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+              Example10:
+                value:
+                  key: path/to/MyApp.apk
+                  uploadId: ABC1234567890
+                  parts: []
+            schema:
+              $ref: '#/components/schemas/apps_completeVersionUpload_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: d9c08aa9-851a-4e80-9361-76e428d181d7
+                    version: 1.0.0
+                    code: "1"
+                    size: 492 MB
+                    added: 2022-02-02T00:00:00.000Z
+                    status: AVAILABLE
+                    downloadUrl: https://storage.bucket.arborxr.com/path/to/file.apk
+              schema:
+                $ref: '#/components/schemas/AppVersion'
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Cannot complete upload for a version that is not in the
+                      pending state.
+                Example2:
+                  value:
+                    message: Cannot complete upload for a version that is not associated
+                      with the app.
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The key field is required. (and 2 more errors)
+                    errors:
+                      key:
+                      - The key field is required.
+                      uploadId:
+                      - The upload id field is required.
+                      parts:
+                      - The parts field is required.
+                Example2:
+                  value:
+                    message: The key must be a string. (and 2 more errors)
+                    errors:
+                      key:
+                      - The key must be a string.
+                      uploadId:
+                      - The upload id must be a string.
+                      parts:
+                      - The parts must be an array.
+                Example3:
+                  value:
+                    message: The parts.0.partNumber must be an integer. (and 3 more
+                      errors)
+                    errors:
+                      parts.0.partNumber:
+                      - The parts.0.partNumber must be an integer.
+                      parts.1.partNumber:
+                      - The parts.1.partNumber must be an integer.
+                      parts.0.eTag:
+                      - The parts.0.eTag must be a string.
+                      parts.1.eTag:
+                      - The parts.1.eTag must be a string.
+                Example4:
+                  value:
+                    message: The version name must be a string.
+                    errors:
+                      versionName:
+                      - The version name must be a string.
+                Example5:
+                  value:
+                    message: The release notes must be a string.
+                    errors:
+                      releaseNotes:
+                      - The release notes must be a string.
+              schema:
+                $ref: '#/components/schemas/CompleteUploadAppVersionValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/release-channels:
+    get:
+      description: Get a paginated list of release channels for an app.
+      operationId: apps_releaseChannels
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example3:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 2
+          Example2:
+            value: 2
+          Example3:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+          Example2:
+            value: 1
+          Example3:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 724d55c7-49f4-4d73-9614-05d76df6295f
+                      name: Stable
+                    - id: 0d88529d-ec29-4c6f-b49c-0a8424557da6
+                      name: Beta
+                    links:
+                      first: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/release-channels?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/release-channels
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/ReleaseChannelsResponse'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/release-channels/{releaseChannelId}:
+    get:
+      description: Get a release channel by id.
+      operationId: apps_releaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example3:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example3:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        explode: false
+        in: path
+        name: releaseChannelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 0d88529d-ec29-4c6f-b49c-0a8424557da6
+                    name: Beta
+                    version:
+                      id: d9c08aa9-851a-4e80-9361-76e428d181d7
+                      version: 1.0.0
+                      code: "1"
+                      size: 492 MB
+                      added: 2022-02-02T00:00:00.000Z
+                      status: AVAILABLE
+                      downloadUrl: https://storage.bucket.arborxr.com/path/to/file.apk
+              schema:
+                $ref: '#/components/schemas/ReleaseChannelWithVersion'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+    put:
+      description: Update a release channel by id.
+      operationId: apps_updateReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example3:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example4:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example5:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example6:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+          Example7:
+            value: 331be3ca-e46e-4a5d-a350-23e2e0c400b1
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+          Example3:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example4:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example5:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example6:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example7:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        explode: false
+        in: path
+        name: releaseChannelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  versionId: 81ec530f-61f3-4fe3-9842-7517c050062c
+              Example2:
+                value:
+                  versionId: 81ec530f-61f3-4fe3-9842-7517c050062c
+              Example3:
+                value:
+                  versionId: 81ec530f-61f3-4fe3-9842-7517c050062c
+              Example4:
+                value:
+                  versionId: 81ec530f-61f3-4fe3-9842-7517c050062c
+              Example5:
+                value:
+                  versionId: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+              Example6:
+                value:
+                  versionId: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+              Example7:
+                value:
+                  versionId: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+            schema:
+              $ref: '#/components/schemas/apps_updateReleaseChannel_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: ec18c9ad-33d6-45df-9051-d194d29243b0
+                    name: Alpha
+                    version:
+                      id: 81ec530f-61f3-4fe3-9842-7517c050062c
+                      version: 2.0.0
+                      code: "2"
+                      size: null
+                      added: 2023-03-03T00:00:00.000Z
+                      status: ERROR
+                      downloadUrl: null
+              schema:
+                $ref: '#/components/schemas/ReleaseChannelWithVersion'
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Cannot update a release channel that is not associated
+                      with the app.
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The version id field is required.
+                    errors:
+                      versionId:
+                      - The version id field is required.
+                Example2:
+                  value:
+                    message: The version id must be a valid UUID.
+                    errors:
+                      versionId:
+                      - The version id must be a valid UUID.
+                Example3:
+                  value:
+                    message: The selected version id is invalid.
+                    errors:
+                      versionId:
+                      - The selected version id is invalid.
+              schema:
+                $ref: '#/components/schemas/UpdateReleaseChannelValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /device-groups:
+    get:
+      description: Get a paginated list of device groups.
+      operationId: deviceGroups_groups
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                      title: Midwest Office
+                      deviceCount: 2
+                    - id: d1b31df6-c040-4e6f-a5d8-e1365c0e2767
+                      title: California Office
+                      deviceCount: 1
+                    links:
+                      first: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/device-groups?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/device-groups
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/DeviceGroupsResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - DeviceGroups
+  /device-models:
+    get:
+      description: Get a paginated list of device models.
+      operationId: deviceModels_deviceModels
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+                      name: Meta Quest 3
+                      manufacturer: Meta
+                    - id: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+                      name: Meta Quest Pro
+                      manufacturer: Meta
+                    links:
+                      first: https://api.xrdm.app/api/v2/device-models?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/device-models?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/device-models?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/device-models?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/device-models?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/device-models?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/device-models
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/DeviceModelsResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - DeviceModels
+  /device-models/{deviceModelId}:
+    get:
+      description: Get a device model by id.
+      operationId: deviceModels_deviceModel
+      parameters:
+      - examples:
+          Example1:
+            value: 660c96fc-8775-49ae-9bf0-863c37cf528f
+          Example2:
+            value: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+          Example3:
+            value: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          Example4:
+            value: 1b2b3b4b-5b6b-7b8b-9b0b-b1b2b3b4b5b6
+          Example5:
+            value: 1b2b3b4b-5b6b-7b8b-9b0b-b1b2b3b4b5b6
+        explode: false
+        in: path
+        name: deviceModelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 660c96fc-8775-49ae-9bf0-863c37cf528f
+                    name: Pico Neo 3
+                    manufacturer: Pico
+                Example2:
+                  value:
+                    id: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+                    name: Meta Quest Pro
+                    manufacturer: Meta
+                Example3:
+                  value:
+                    id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+                    name: Meta Quest 3
+                    manufacturer: Meta
+              schema:
+                $ref: '#/components/schemas/DeviceModel'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - DeviceModels
+  /devices:
+    get:
+      description: Get a paginated list of devices.
+      operationId: devices_devices
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                      title: Sim Station Pico
+                      serialNumber: F233SJR96590SA
+                      deviceGroup: Midwest Office
+                      model: Pico Neo 3
+                      tags:
+                      - midwest
+                      - pico
+                      lastCommunicatedAt: 2023-12-19T08:24:04.000Z
+                    - id: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+                      title: Sound Stage Quest
+                      serialNumber: G255KFI92837LE
+                      deviceGroup: null
+                      model: Meta Quest 2
+                      tags:
+                      - california
+                      - quest
+                      - meta
+                      - sound stage
+                      lastCommunicatedAt: 2023-12-22T17:11:47.423Z
+                    links:
+                      first: https://api.xrdm.app/api/v2/devices?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/devices?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/devices?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/devices?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/devices?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/devices?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/devices
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/DevicesResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /devices/{deviceId}:
+    get:
+      description: Get a device by id.
+      operationId: devices_device
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+          Example4:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                    title: Sim Station Pico
+                    serialNumber: F233SJR96590SA
+                    deviceGroup:
+                      id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                      title: Midwest Office
+                    model: Pico Neo 3
+                    tags:
+                    - midwest
+                    - pico
+                    lastCommunicatedAt: 2023-12-19T08:24:04.000Z
+                    isOnline: true
+                Example2:
+                  value:
+                    id: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+                    title: Sound Stage Quest
+                    serialNumber: G255KFI92837LE
+                    deviceGroup: null
+                    model: Meta Quest 2
+                    tags:
+                    - california
+                    - quest
+                    - meta
+                    - sound stage
+                    lastCommunicatedAt: 2023-12-22T17:11:47.423Z
+                    isOnline: false
+              schema:
+                $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+    put:
+      description: Update a device by id.
+      operationId: devices_updateDevice
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+          Example3:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+          Example4:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+          Example5:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+          Example6:
+            value: d4eb769b-a4c3-41f3-ae5a-73cf6ec7145d
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  title: Sim Station Pico
+                  deviceGroupId: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                  tags:
+                  - midwest
+                  - pico
+              Example2:
+                value:
+                  deviceGroupId: null
+                  tags: []
+              Example3:
+                value:
+                  title: Sim Station Pico
+                  deviceGroupId: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                  tags:
+                  - midwest
+                  - pico
+              Example4:
+                value:
+                  title: Sim Station Pico
+                  deviceGroupId: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                  tags:
+                  - midwest
+                  - pico
+              Example5:
+                value:
+                  title: Sim Station Pico
+                  deviceGroupId: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                  tags:
+                  - midwest
+                  - pico
+              Example6:
+                value:
+                  title: Sim Station Pico
+                  deviceGroupId: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                  tags:
+                  - midwest
+                  - pico
+            schema:
+              $ref: '#/components/schemas/devices_updateDevice_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                    title: Sim Station Pico
+                    serialNumber: F233SJR96590SA
+                    deviceGroup:
+                      id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+                      title: Midwest Office
+                    model: Pico Neo 3
+                    tags:
+                    - midwest
+                    - pico
+                    lastCommunicatedAt: 2023-12-19T08:24:04.000Z
+                    isOnline: true
+                Example2:
+                  value:
+                    id: 343def19-414f-424d-8b54-7b46464b61e4
+                    title: My Quest 2
+                    serialNumber: SH88KJR92837LE
+                    deviceGroup: null
+                    model: Meta Quest 2
+                    tags: []
+                    lastCommunicatedAt: 2024-01-04T15:07:12.423Z
+                    isOnline: false
+              schema:
+                $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+        "422":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The title must be a string. (and 2 more errors)
+                    errors:
+                      title:
+                      - The title must be a string.
+                      deviceGroupId:
+                      - The device group id must be a valid UUID.
+                      tags:
+                      - The tags must be an array.
+                Example2:
+                  value:
+                    message: The tags.0 must be a string. (and 1 more error)
+                    errors:
+                      tags.0:
+                      - The tags.0 must be a string.
+                      tags.1:
+                      - The tags.1 must be a string.
+              schema:
+                $ref: '#/components/schemas/UpdateDeviceValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /devices/{deviceId}/launch/{appId}:
+    post:
+      description: Launch an app on a device.
+      operationId: devices_launchApp
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example4:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+          Example3:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+          Example4:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: App not installed on device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /devices/{deviceId}/reboot:
+    post:
+      description: Reboot a device.
+      operationId: devices_reboot
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+          Example3:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+          Example4:
+            value: 343def19-414f-424d-8b54-7b46464b61e4
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Unable to reboot device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /files:
+    get:
+      description: Get a paginated list of files.
+      operationId: files_files
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 85116af7-b042-4d52-99ef-9eeadd642d54
+                      name: sunset.jpg
+                      location: /sdcard/images
+                      size: 3 MB
+                      tags:
+                      - images
+                      - nature
+                      added: 2021-01-01T00:00:00.000Z
+                    - id: c53f8afa-4c36-4369-b0f8-e0208982d975
+                      name: data.csv
+                      location: /sdcard
+                      size: 94 KB
+                      tags:
+                      - data
+                      - csv
+                      - spreadsheet
+                      - numbers
+                      - statistics
+                      added: 2024-01-01T10:34:22.140Z
+                    links:
+                      first: https://api.xrdm.app/api/v2/files?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/files?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/files?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/files?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/files?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/files?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/files
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/FilesResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Files
+  /files/{fileId}:
+    get:
+      description: Get a file by id.
+      operationId: files_file
+      parameters:
+      - examples:
+          Example1:
+            value: 85116af7-b042-4d52-99ef-9eeadd642d54
+          Example2:
+            value: c53f8afa-4c36-4369-b0f8-e0208982d975
+          Example3:
+            value: 85116af7-b042-4d52-99ef-9eeadd642d54
+          Example4:
+            value: 85116af7-b042-4d52-99ef-9eeadd642d54
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 85116af7-b042-4d52-99ef-9eeadd642d54
+                    name: sunset.jpg
+                    location: /sdcard/images
+                    size: 3 MB
+                    tags:
+                    - images
+                    - nature
+                    added: 2021-01-01T00:00:00.000Z
+                    deviceIds:
+                    - 9d6a9043-e469-4239-9cc5-147fb20905d9
+                    - 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+                Example2:
+                  value:
+                    id: c53f8afa-4c36-4369-b0f8-e0208982d975
+                    name: data.csv
+                    location: /sdcard
+                    size: 94 KB
+                    tags:
+                    - data
+                    - csv
+                    - spreadsheet
+                    - numbers
+                    - statistics
+                    added: 2024-01-01T10:34:22.140Z
+                    deviceIds:
+                    - 9d6a9043-e469-4239-9cc5-147fb20905d9
+              schema:
+                $ref: '#/components/schemas/FileWithDeviceIds'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Files
+components:
+  schemas:
+    NotFoundErrorBody:
+      example:
+        message: Not Found
+      properties:
+        message:
+          example: Not Found
+          type: string
+      required:
+      - message
+      title: NotFoundErrorBody
+      type: object
+    ForbiddenErrorBody:
+      example:
+        message: Forbidden
+      properties:
+        message:
+          example: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenErrorBody
+      type: object
+    BadRequestErrorBody:
+      example:
+        message: Cannot upload parts for a version that is not in the pending state.
+      properties:
+        message:
+          example: Cannot upload parts for a version that is not in the pending state.
+          type: string
+      required:
+      - message
+      title: BadRequestErrorBody
+      type: object
+    UpdateAppValidationErrorBody:
+      example:
+        message: The title must be a string. (and 2 more errors)
+        errors:
+          tags.0:
+          - tags.0
+          - tags.0
+          tags.1:
+          - tags.1
+          - tags.1
+          description:
+          - description
+          - description
+          title:
+          - title
+          - title
+          tags:
+          - tags
+          - tags
+      properties:
+        message:
+          example: The title must be a string. (and 2 more errors)
+          type: string
+        errors:
+          $ref: '#/components/schemas/UpdateAppValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: UpdateAppValidationErrorBody
+      type: object
+    UpdateAppValidationErrorBodyErrors:
+      example:
+        tags.0:
+        - tags.0
+        - tags.0
+        tags.1:
+        - tags.1
+        - tags.1
+        description:
+        - description
+        - description
+        title:
+        - title
+        - title
+        tags:
+        - tags
+        - tags
+      properties:
+        title:
+          items:
+            type: string
+          nullable: true
+          type: array
+        description:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags.0:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags.1:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: UpdateAppValidationErrorBodyErrors
+      type: object
+    StartUploadAppVersionValidationErrorBody:
+      example:
+        message: The filename field is required. (and 1 more error)
+        errors:
+          filename:
+          - filename
+          - filename
+          releaseChannelId:
+          - releaseChannelId
+          - releaseChannelId
+      properties:
+        message:
+          example: The filename field is required. (and 1 more error)
+          type: string
+        errors:
+          $ref: '#/components/schemas/StartUploadAppVersionValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: StartUploadAppVersionValidationErrorBody
+      type: object
+    StartUploadAppVersionValidationErrorBodyErrors:
+      example:
+        filename:
+        - filename
+        - filename
+        releaseChannelId:
+        - releaseChannelId
+        - releaseChannelId
+      properties:
+        filename:
+          items:
+            type: string
+          nullable: true
+          type: array
+        releaseChannelId:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: StartUploadAppVersionValidationErrorBodyErrors
+      type: object
+    PresignUploadAppVersionValidationErrorBody:
+      example:
+        message: The key field is required. (and 2 more errors)
+        errors:
+          partNumbers.1:
+          - partNumbers.1
+          - partNumbers.1
+          partNumbers.0:
+          - partNumbers.0
+          - partNumbers.0
+          uploadId:
+          - uploadId
+          - uploadId
+          partNumbers:
+          - partNumbers
+          - partNumbers
+          key:
+          - key
+          - key
+      properties:
+        message:
+          example: The key field is required. (and 2 more errors)
+          type: string
+        errors:
+          $ref: '#/components/schemas/PresignUploadAppVersionValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: PresignUploadAppVersionValidationErrorBody
+      type: object
+    PresignUploadAppVersionValidationErrorBodyErrors:
+      example:
+        partNumbers.1:
+        - partNumbers.1
+        - partNumbers.1
+        partNumbers.0:
+        - partNumbers.0
+        - partNumbers.0
+        uploadId:
+        - uploadId
+        - uploadId
+        partNumbers:
+        - partNumbers
+        - partNumbers
+        key:
+        - key
+        - key
+      properties:
+        key:
+          items:
+            type: string
+          nullable: true
+          type: array
+        uploadId:
+          items:
+            type: string
+          nullable: true
+          type: array
+        partNumbers:
+          items:
+            type: string
+          nullable: true
+          type: array
+        partNumbers.0:
+          items:
+            type: string
+          nullable: true
+          type: array
+        partNumbers.1:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: PresignUploadAppVersionValidationErrorBodyErrors
+      type: object
+    CompleteUploadAppVersionValidationErrorBody:
+      example:
+        message: The key field is required. (and 2 more errors)
+        errors:
+          parts.1.eTag:
+          - parts.1.eTag
+          - parts.1.eTag
+          parts.0.partNumber:
+          - parts.0.partNumber
+          - parts.0.partNumber
+          releaseNotes:
+          - releaseNotes
+          - releaseNotes
+          uploadId:
+          - uploadId
+          - uploadId
+          parts:
+          - parts
+          - parts
+          parts.1.partNumber:
+          - parts.1.partNumber
+          - parts.1.partNumber
+          versionName:
+          - versionName
+          - versionName
+          parts.0.eTag:
+          - parts.0.eTag
+          - parts.0.eTag
+          key:
+          - key
+          - key
+      properties:
+        message:
+          example: The key field is required. (and 2 more errors)
+          type: string
+        errors:
+          $ref: '#/components/schemas/CompleteUploadAppVersionValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: CompleteUploadAppVersionValidationErrorBody
+      type: object
+    CompleteUploadAppVersionValidationErrorBodyErrors:
+      example:
+        parts.1.eTag:
+        - parts.1.eTag
+        - parts.1.eTag
+        parts.0.partNumber:
+        - parts.0.partNumber
+        - parts.0.partNumber
+        releaseNotes:
+        - releaseNotes
+        - releaseNotes
+        uploadId:
+        - uploadId
+        - uploadId
+        parts:
+        - parts
+        - parts
+        parts.1.partNumber:
+        - parts.1.partNumber
+        - parts.1.partNumber
+        versionName:
+        - versionName
+        - versionName
+        parts.0.eTag:
+        - parts.0.eTag
+        - parts.0.eTag
+        key:
+        - key
+        - key
+      properties:
+        key:
+          items:
+            type: string
+          nullable: true
+          type: array
+        uploadId:
+          items:
+            type: string
+          nullable: true
+          type: array
+        parts:
+          items:
+            type: string
+          nullable: true
+          type: array
+        parts.0.partNumber:
+          items:
+            type: string
+          nullable: true
+          type: array
+        parts.1.partNumber:
+          items:
+            type: string
+          nullable: true
+          type: array
+        parts.0.eTag:
+          items:
+            type: string
+          nullable: true
+          type: array
+        parts.1.eTag:
+          items:
+            type: string
+          nullable: true
+          type: array
+        versionName:
+          items:
+            type: string
+          nullable: true
+          type: array
+        releaseNotes:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: CompleteUploadAppVersionValidationErrorBodyErrors
+      type: object
+    UpdateReleaseChannelValidationErrorBody:
+      example:
+        message: The version id field is required.
+        errors:
+          versionId:
+          - versionId
+          - versionId
+      properties:
+        message:
+          example: The version id field is required.
+          type: string
+        errors:
+          $ref: '#/components/schemas/UpdateReleaseChannelValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: UpdateReleaseChannelValidationErrorBody
+      type: object
+    UpdateReleaseChannelValidationErrorBodyErrors:
+      example:
+        versionId:
+        - versionId
+        - versionId
+      properties:
+        versionId:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: UpdateReleaseChannelValidationErrorBodyErrors
+      type: object
+    UpdateDeviceValidationErrorBody:
+      example:
+        message: The title must be a string. (and 2 more errors)
+        errors:
+          tags.0:
+          - tags.0
+          - tags.0
+          tags.1:
+          - tags.1
+          - tags.1
+          deviceGroupId:
+          - deviceGroupId
+          - deviceGroupId
+          title:
+          - title
+          - title
+          tags:
+          - tags
+          - tags
+      properties:
+        message:
+          example: The title must be a string. (and 2 more errors)
+          type: string
+        errors:
+          $ref: '#/components/schemas/UpdateDeviceValidationErrorBodyErrors'
+      required:
+      - errors
+      - message
+      title: UpdateDeviceValidationErrorBody
+      type: object
+    UpdateDeviceValidationErrorBodyErrors:
+      example:
+        tags.0:
+        - tags.0
+        - tags.0
+        tags.1:
+        - tags.1
+        - tags.1
+        deviceGroupId:
+        - deviceGroupId
+        - deviceGroupId
+        title:
+        - title
+        - title
+        tags:
+        - tags
+        - tags
+      properties:
+        title:
+          items:
+            type: string
+          nullable: true
+          type: array
+        deviceGroupId:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags.0:
+          items:
+            type: string
+          nullable: true
+          type: array
+        tags.1:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: UpdateDeviceValidationErrorBodyErrors
+      type: object
+    Links:
+      description: Pagination navigation links.
+      example:
+        next: next
+        last: last
+        prev: prev
+        first: first
+      properties:
+        first:
+          nullable: true
+          type: string
+        last:
+          nullable: true
+          type: string
+        prev:
+          nullable: true
+          type: string
+        next:
+          nullable: true
+          type: string
+      title: Links
+      type: object
+    Meta:
+      description: Metadata about a paginated response.
+      example:
+        path: path
+        per_page: 5
+        total: 2
+        last_page: 1
+        from: 6
+        links:
+        - active: true
+          label: label
+          url: url
+        - active: true
+          label: label
+          url: url
+        to: 5
+        current_page: 0
+      properties:
+        current_page:
+          type: integer
+        from:
+          type: integer
+        last_page:
+          type: integer
+        links:
+          items:
+            $ref: '#/components/schemas/PaginatorLink'
+          type: array
+        path:
+          type: string
+        per_page:
+          type: integer
+        to:
+          type: integer
+        total:
+          type: integer
+      required:
+      - current_page
+      - from
+      - last_page
+      - links
+      - path
+      - per_page
+      - to
+      - total
+      title: Meta
+      type: object
+    PaginatorLink:
+      description: A link to a page of paginated results.
+      example:
+        active: true
+        label: label
+        url: url
+      properties:
+        url:
+          nullable: true
+          type: string
+        label:
+          type: string
+        active:
+          type: boolean
+      required:
+      - active
+      - label
+      title: PaginatorLink
+      type: object
+    CompleteVersionUploadRequestPart:
+      description: A part number and ETag for a part of a multipart upload.
+      properties:
+        partNumber:
+          type: integer
+        eTag:
+          type: string
+      required:
+      - eTag
+      - partNumber
+      title: CompleteVersionUploadRequestPart
+      type: object
+    RootResponse:
+      description: Information about the API.
+      example:
+        documentation: https://api.xrdm.docker/api/v2/docs
+        rateLimiting: 2000 requests per minute per organization.
+        contact: support@arborxr.com
+        name: ArborXR API
+        description: The REST API for ArborXR.
+        termsOfService: https://arborxr.com/terms-of-service/
+        version: v2
+        authentication: "Bearer token; required. Generate a token in the ArborXR Portal\
+          \ by navigating to: Settings > Access Tokens."
+      properties:
+        name:
+          example: ArborXR API
+          type: string
+        description:
+          example: The REST API for ArborXR.
+          type: string
+        version:
+          example: v2
+          type: string
+        documentation:
+          example: https://api.xrdm.docker/api/v2/docs
+          type: string
+        authentication:
+          example: "Bearer token; required. Generate a token in the ArborXR Portal\
+            \ by navigating to: Settings > Access Tokens."
+          type: string
+        rateLimiting:
+          example: 2000 requests per minute per organization.
+          type: string
+        contact:
+          example: support@arborxr.com
+          type: string
+        termsOfService:
+          example: https://arborxr.com/terms-of-service/
+          type: string
+      required:
+      - authentication
+      - contact
+      - description
+      - documentation
+      - name
+      - rateLimiting
+      - termsOfService
+      - version
+      title: RootResponse
+      type: object
+    AppsResponse:
+      description: A paginated list of apps.
+      example:
+        data:
+        - deviceModels:
+          - name: Meta Quest 3
+            id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+            manufacturer: Meta
+          - name: Meta Quest 3
+            id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+            manufacturer: Meta
+        - deviceModels:
+          - name: Meta Quest 3
+            id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+            manufacturer: Meta
+          - name: Meta Quest 3
+            id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+            manufacturer: Meta
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AppWithDeviceModels'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: AppsResponse
+      type: object
+    ReleaseChannelsResponse:
+      description: A paginated list of release channels.
+      example:
+        data:
+        - name: Stable
+          id: 724d55c7-49f4-4d73-9614-05d76df6295f
+        - name: Stable
+          id: 724d55c7-49f4-4d73-9614-05d76df6295f
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ReleaseChannel'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: ReleaseChannelsResponse
+      type: object
+    VersionsResponse:
+      description: A paginated list of app versions.
+      example:
+        data:
+        - code: code
+          size: size
+          added: 2021-01-01T00:00:00Z
+          downloadUrl: downloadUrl
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          version: 2.0.0-prealpha+328
+          status: null
+        - code: code
+          size: size
+          added: 2021-01-01T00:00:00Z
+          downloadUrl: downloadUrl
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          version: 2.0.0-prealpha+328
+          status: null
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AppVersion'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: VersionsResponse
+      type: object
+    StartVersionUploadResponse:
+      description: Information about the initiated upload.
+      example:
+        versionId: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+        uploadId: ABC1234567890
+        key: path/to/MyApp.apk
+      properties:
+        uploadId:
+          example: ABC1234567890
+          type: string
+        key:
+          example: path/to/MyApp.apk
+          type: string
+        versionId:
+          example: 342c2a9f-559c-4fee-9d43-51ec4c4c55f9
+          format: uuid
+          type: string
+      required:
+      - key
+      - uploadId
+      - versionId
+      title: StartVersionUploadResponse
+      type: object
+    PreSignVersionUploadUrlResponsePart:
+      description: A presigned-URL/part-number pair for uploading the file.
+      example:
+        presignedUrl: presignedUrl
+        partNumber: 0
+      properties:
+        partNumber:
+          type: integer
+        presignedUrl:
+          type: string
+      required:
+      - partNumber
+      - presignedUrl
+      title: PreSignVersionUploadUrlResponsePart
+      type: object
+    DeviceModelsResponse:
+      description: A paginated list of supported device models used by your organization.
+      example:
+        data:
+        - name: Meta Quest 3
+          id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          manufacturer: Meta
+        - name: Meta Quest 3
+          id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          manufacturer: Meta
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DeviceModel'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: DeviceModelsResponse
+      type: object
+    DevicesResponse:
+      description: A paginated list of devices.
+      example:
+        data:
+        - serialNumber: F233SJR96590SA
+          lastCommunicatedAt: 2023-12-19T08:24:04Z
+          model: Pico Neo 3
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          title: Sim Station Pico
+          deviceGroup: deviceGroup
+          tags:
+          - midwest
+          - pico
+        - serialNumber: F233SJR96590SA
+          lastCommunicatedAt: 2023-12-19T08:24:04Z
+          model: Pico Neo 3
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          title: Sim Station Pico
+          deviceGroup: deviceGroup
+          tags:
+          - midwest
+          - pico
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Device'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: DevicesResponse
+      type: object
+    FilesResponse:
+      description: A paginated list of files.
+      example:
+        data:
+        - size: 3 MB
+          added: 2021-01-01T00:00:00Z
+          name: sunset.jpg
+          location: /sdcard/images
+          id: 85116af7-b042-4d52-99ef-9eeadd642d54
+          tags:
+          - images
+          - nature
+        - size: 3 MB
+          added: 2021-01-01T00:00:00Z
+          name: sunset.jpg
+          location: /sdcard/images
+          id: 85116af7-b042-4d52-99ef-9eeadd642d54
+          tags:
+          - images
+          - nature
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/File'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: FilesResponse
+      type: object
+    DeviceGroupsResponse:
+      description: A paginated list of device groups.
+      example:
+        data:
+        - deviceCount: 2
+        - deviceCount: 2
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DeviceGroup'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: DeviceGroupsResponse
+      type: object
+    App:
+      description: Represents an app in your content library.
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        title:
+          example: Truck Driving Simulator
+          type: string
+        description:
+          example: Learn how to drive big rigs.
+          type: string
+        tags:
+          example:
+          - training
+          - trucking
+          - driving
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      - id
+      - tags
+      - title
+      title: App
+      type: object
+    AppWithDeviceModels:
+      allOf:
+      - $ref: '#/components/schemas/App'
+      description: Represents an app in your content library with a list of device
+        models that it supports.
+      example:
+        deviceModels:
+        - name: Meta Quest 3
+          id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          manufacturer: Meta
+        - name: Meta Quest 3
+          id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          manufacturer: Meta
+      properties:
+        deviceModels:
+          items:
+            $ref: '#/components/schemas/DeviceModel'
+          type: array
+      required:
+      - deviceModels
+      title: AppWithDeviceModels
+      type: object
+    AppVersionStatus:
+      enum:
+      - ERROR
+      - PROCESSING
+      - UPLOADED
+      - PENDING
+      - AVAILABLE
+      title: AppVersionStatus
+      type: string
+    AppVersion:
+      description: Represents an uploaded version of an app in your content library.
+      example:
+        code: code
+        size: size
+        added: 2021-01-01T00:00:00Z
+        downloadUrl: downloadUrl
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        version: 2.0.0-prealpha+328
+        status: null
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        version:
+          example: 2.0.0-prealpha+328
+          type: string
+        code:
+          nullable: true
+          type: string
+        size:
+          nullable: true
+          type: string
+        added:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/AppVersionStatus'
+        downloadUrl:
+          nullable: true
+          type: string
+      required:
+      - added
+      - id
+      - status
+      - version
+      title: AppVersion
+      type: object
+    DeviceModel:
+      description: "Represents a device model (e.g. Meta Quest 2, Pico Neo 3, etc.)\
+        \ that is in use in your organization."
+      example:
+        name: Meta Quest 3
+        id: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+        manufacturer: Meta
+      properties:
+        id:
+          example: f2d0061d-47f3-4a27-b5f0-572e3966fd9e
+          format: uuid
+          type: string
+        name:
+          example: Meta Quest 3
+          type: string
+        manufacturer:
+          example: Meta
+          type: string
+      required:
+      - id
+      - manufacturer
+      - name
+      title: DeviceModel
+      type: object
+    Device:
+      description: Represents a device that is managed by your organization.
+      example:
+        serialNumber: F233SJR96590SA
+        lastCommunicatedAt: 2023-12-19T08:24:04Z
+        model: Pico Neo 3
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        title: Sim Station Pico
+        deviceGroup: deviceGroup
+        tags:
+        - midwest
+        - pico
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        title:
+          example: Sim Station Pico
+          type: string
+        serialNumber:
+          example: F233SJR96590SA
+          type: string
+        deviceGroup:
+          nullable: true
+          type: string
+        model:
+          example: Pico Neo 3
+          type: string
+        tags:
+          example:
+          - midwest
+          - pico
+          items:
+            type: string
+          type: array
+        lastCommunicatedAt:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
+      required:
+      - id
+      - lastCommunicatedAt
+      - model
+      - serialNumber
+      - tags
+      - title
+      title: Device
+      type: object
+    DeviceWithSimplifiedDeviceGroup:
+      description: Represents a device that is managed by your organization with a
+        simplified group object and connectivity status.
+      example:
+        serialNumber: F233SJR96590SA
+        lastCommunicatedAt: 2023-12-19T08:24:04Z
+        model: Pico Neo 3
+        isOnline: true
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        title: Sim Station Pico
+        deviceGroup:
+          id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+          title: Midwest Office
+        tags:
+        - midwest
+        - pico
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        title:
+          example: Sim Station Pico
+          type: string
+        serialNumber:
+          example: F233SJR96590SA
+          type: string
+        deviceGroup:
+          $ref: '#/components/schemas/SimplifiedDeviceGroup'
+        model:
+          example: Pico Neo 3
+          type: string
+        tags:
+          example:
+          - midwest
+          - pico
+          items:
+            type: string
+          type: array
+        lastCommunicatedAt:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
+        isOnline:
+          example: true
+          type: boolean
+      required:
+      - id
+      - isOnline
+      - lastCommunicatedAt
+      - model
+      - serialNumber
+      - tags
+      - title
+      title: DeviceWithSimplifiedDeviceGroup
+      type: object
+    SimplifiedDeviceGroup:
+      description: Represents a device group that is managed by your organization
+        (id and title only).
+      example:
+        id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+        title: Midwest Office
+      properties:
+        id:
+          example: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+          format: uuid
+          type: string
+        title:
+          example: Midwest Office
+          type: string
+      required:
+      - id
+      - title
+      title: SimplifiedDeviceGroup
+      type: object
+    DeviceGroup:
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedDeviceGroup'
+      description: Represents a device group that is managed by your organization.
+      example:
+        deviceCount: 2
+      properties:
+        deviceCount:
+          example: 2
+          type: integer
+      required:
+      - deviceCount
+      title: DeviceGroup
+      type: object
+    File:
+      description: Represents a file that is stored in your organization's content
+        library.
+      example:
+        size: 3 MB
+        added: 2021-01-01T00:00:00Z
+        name: sunset.jpg
+        location: /sdcard/images
+        id: 85116af7-b042-4d52-99ef-9eeadd642d54
+        tags:
+        - images
+        - nature
+      properties:
+        id:
+          example: 85116af7-b042-4d52-99ef-9eeadd642d54
+          format: uuid
+          type: string
+        name:
+          example: sunset.jpg
+          type: string
+        location:
+          example: /sdcard/images
+          type: string
+        size:
+          example: 3 MB
+          type: string
+        tags:
+          example:
+          - images
+          - nature
+          items:
+            type: string
+          type: array
+        added:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+      required:
+      - added
+      - id
+      - location
+      - name
+      - size
+      - tags
+      title: File
+      type: object
+    FileWithDeviceIds:
+      allOf:
+      - $ref: '#/components/schemas/File'
+      description: Represents a file that is stored in your organization's content
+        library with a list of device ids that it is installed on.
+      example:
+        deviceIds:
+        - 9d6a9043-e469-4239-9cc5-147fb20905d9
+        - 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+      properties:
+        deviceIds:
+          example:
+          - 9d6a9043-e469-4239-9cc5-147fb20905d9
+          - 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - deviceIds
+      title: FileWithDeviceIds
+      type: object
+    ReleaseChannel:
+      description: Represents a release channel that is designated in your organization.
+      example:
+        name: Stable
+        id: 724d55c7-49f4-4d73-9614-05d76df6295f
+      properties:
+        id:
+          example: 724d55c7-49f4-4d73-9614-05d76df6295f
+          format: uuid
+          type: string
+        name:
+          example: Stable
+          type: string
+      required:
+      - id
+      - name
+      title: ReleaseChannel
+      type: object
+    ReleaseChannelWithVersion:
+      allOf:
+      - $ref: '#/components/schemas/ReleaseChannel'
+      description: Represents a release channel that is designated in your organization
+        with the current app version that is assigned to it.
+      example:
+        version:
+          code: code
+          size: size
+          added: 2021-01-01T00:00:00Z
+          downloadUrl: downloadUrl
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          version: 2.0.0-prealpha+328
+          status: null
+      properties:
+        version:
+          $ref: '#/components/schemas/AppVersion'
+      required:
+      - version
+      title: ReleaseChannelWithVersion
+      type: object
+    apps_updateApp_request:
+      properties:
+        title:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    apps_startVersionUpload_request:
+      properties:
+        filename:
+          example: MyApp-v1.apk
+          type: string
+        releaseChannelId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - filename
+      type: object
+    apps_preSignVersionUploadUrl_request:
+      properties:
+        key:
+          example: path/to/MyApp.apk
+          type: string
+        uploadId:
+          example: ABC1234567890
+          type: string
+        partNumbers:
+          example:
+          - 1
+          - 2
+          - 3
+          items:
+            type: integer
+          type: array
+      required:
+      - key
+      - partNumbers
+      - uploadId
+      type: object
+    apps_completeVersionUpload_request:
+      properties:
+        key:
+          example: path/to/MyApp.apk
+          type: string
+        uploadId:
+          example: ABC1234567890
+          type: string
+        parts:
+          items:
+            $ref: '#/components/schemas/CompleteVersionUploadRequestPart'
+          type: array
+        versionName:
+          nullable: true
+          type: string
+        releaseNotes:
+          nullable: true
+          type: string
+      required:
+      - key
+      - parts
+      - uploadId
+      type: object
+    apps_updateReleaseChannel_request:
+      properties:
+        versionId:
+          example: 81ec530f-61f3-4fe3-9842-7517c050062c
+          format: uuid
+          type: string
+      required:
+      - versionId
+      type: object
+    devices_updateDevice_request:
+      properties:
+        title:
+          nullable: true
+          type: string
+        deviceGroupId:
+          format: uuid
+          nullable: true
+          type: string
+        tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
