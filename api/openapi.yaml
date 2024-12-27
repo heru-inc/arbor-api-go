@@ -416,21 +416,21 @@ paths:
                     data:
                     - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
                       version: 2.0.0-prealpha+328
-                      code: "328"
+                      code: 328
                       size: null
                       added: 2021-01-01T00:00:00.000Z
                       status: PENDING
                       downloadUrl: null
                     - id: d9c08aa9-851a-4e80-9361-76e428d181d7
                       version: 1.0.0
-                      code: "1"
+                      code: 1
                       size: 492 MB
                       added: 2022-02-02T00:00:00.000Z
                       status: AVAILABLE
                       downloadUrl: https://storage.bucket.arborxr.com/path/to/file.apk
                     - id: 81ec530f-61f3-4fe3-9842-7517c050062c
                       version: 2.0.0
-                      code: "2"
+                      code: 2
                       size: null
                       added: 2023-03-03T00:00:00.000Z
                       status: ERROR
@@ -968,7 +968,7 @@ paths:
                   value:
                     id: d9c08aa9-851a-4e80-9361-76e428d181d7
                     version: 1.0.0
-                    code: "1"
+                    code: 1
                     size: 492 MB
                     added: 2022-02-02T00:00:00.000Z
                     status: AVAILABLE
@@ -1229,7 +1229,7 @@ paths:
                     version:
                       id: d9c08aa9-851a-4e80-9361-76e428d181d7
                       version: 1.0.0
-                      code: "1"
+                      code: 1
                       size: 492 MB
                       added: 2022-02-02T00:00:00.000Z
                       status: AVAILABLE
@@ -1351,7 +1351,7 @@ paths:
                     version:
                       id: 81ec530f-61f3-4fe3-9842-7517c050062c
                       version: 2.0.0
-                      code: "2"
+                      code: 2
                       size: null
                       added: 2023-03-03T00:00:00.000Z
                       status: ERROR
@@ -1414,6 +1414,157 @@ paths:
                       - The selected version id is invalid.
               schema:
                 $ref: '#/components/schemas/UpdateReleaseChannelValidationErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+  /apps/{appId}/release-channels/{releaseChannelId}/share:
+    delete:
+      description: Revoke a shared release channel from another org via its org slug.
+      operationId: apps_revokeReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+        explode: false
+        in: path
+        name: releaseChannelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  organizationSlug: a-good-org-slug
+              Example2:
+                value:
+                  organizationSlug: a-bad-org-slug
+            schema:
+              $ref: '#/components/schemas/apps_revokeReleaseChannel_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The release channel has been shared with the specified
+                      organization slug.
+              schema:
+                $ref: '#/components/schemas/ReleaseChannelShared'
+          description: ""
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Apps
+    post:
+      description: Share a release channel to another org via its org slug.
+      operationId: apps_shareReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        explode: false
+        in: path
+        name: appId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - examples:
+          Example1:
+            value: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          Example2:
+            value: 486e4d3e-4afc-46e4-ab95-2f779d33bfa1
+        explode: false
+        in: path
+        name: releaseChannelId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  organizationSlug: my-org
+              Example2:
+                value:
+                  organizationSlug: my-org
+            schema:
+              $ref: '#/components/schemas/apps_shareReleaseChannel_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: The release channel has been shared with the specified
+                      organization slug.
+              schema:
+                $ref: '#/components/schemas/ReleaseChannelShared'
+          description: ""
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
           description: ""
       security:
       - BearerAuth: []
@@ -1488,6 +1639,161 @@ paths:
                       total: 4
               schema:
                 $ref: '#/components/schemas/DeviceGroupsResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - DeviceGroups
+  /device-groups/{deviceGroupId}/release-channels:
+    delete:
+      description: Remove a release channel from a device group.
+      operationId: deviceGroups_removeReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example4:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  releaseChannelId: 9d6a9043-e469-4239-9cc5-147fb20905d9
+              Example2:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example3:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example4:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+            schema:
+              $ref: '#/components/schemas/deviceGroups_addReleaseChannel_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Unable to reboot device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - DeviceGroups
+    post:
+      description: Add a release channel to a device group.
+      operationId: deviceGroups_addReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example4:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  releaseChannelId: 9d6a9043-e469-4239-9cc5-147fb20905d9
+              Example2:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example3:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example4:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+            schema:
+              $ref: '#/components/schemas/deviceGroups_addReleaseChannel_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Unable to reboot device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
           description: ""
       security:
       - BearerAuth: []
@@ -1682,6 +1988,28 @@ paths:
                       - midwest
                       - pico
                       lastCommunicatedAt: 2023-12-19T08:24:04.000Z
+                      isOnline: true
+                      clientVersion: 1.2.3
+                      launcherVersion: 4.5.6
+                      enrollmentDate: 2023-12-19T08:24:04.000Z
+                      systemVersion: "8.1"
+                      osVersion: 1.2.3
+                      ssid: MyWiFi
+                      macAddress: 00:11:22:33:44:55
+                      randomizedMacAddress: 00:11:22:33:44:55
+                      storageSpaceFreeGb: 10.5
+                      storageSpaceTotalGb: 64
+                      batteryHealth: GOOD
+                      batteryCharging: true
+                      batteryPercentage: 100
+                      batteryTemperatureC: 25
+                      ipAddress: 10.24.58.100
+                      signalStrength: 99
+                      frequencyMhz: 2437
+                      linkSpeedMbps: 72
+                      lastLocationLatitude: 37.7749
+                      lastLocationLongitude: -122.4194
+                      lastLocationAt: 2023-12-19T08:24:04.000Z
                     - id: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
                       title: Sound Stage Quest
                       serialNumber: G255KFI92837LE
@@ -1693,6 +2021,28 @@ paths:
                       - meta
                       - sound stage
                       lastCommunicatedAt: 2023-12-22T17:11:47.423Z
+                      isOnline: false
+                      clientVersion: 1.2.3
+                      launcherVersion: 4.5.6
+                      enrollmentDate: 2023-12-22T17:11:47.423Z
+                      systemVersion: "8.1"
+                      osVersion: 1.2.3
+                      ssid: MyWiFi
+                      macAddress: 00:11:22:33:44:55
+                      randomizedMacAddress: 00:11:22:33:44:55
+                      storageSpaceFreeGb: 10.5
+                      storageSpaceTotalGb: 64
+                      batteryHealth: GOOD
+                      batteryCharging: true
+                      batteryPercentage: 100
+                      batteryTemperatureC: 25
+                      ipAddress: 10.24.58.100
+                      signalStrength: 99
+                      frequencyMhz: 2437
+                      linkSpeedMbps: 72
+                      lastLocationLatitude: 37.7749
+                      lastLocationLongitude: -122.4194
+                      lastLocationAt: 2023-12-22T17:11:47.423Z
                     links:
                       first: https://api.xrdm.app/api/v2/devices?per_page=2&page=1
                       last: https://api.xrdm.app/api/v2/devices?per_page=2&page=2
@@ -1767,6 +2117,27 @@ paths:
                     - pico
                     lastCommunicatedAt: 2023-12-19T08:24:04.000Z
                     isOnline: true
+                    clientVersion: 1.2.3
+                    launcherVersion: 4.5.6
+                    enrollmentDate: 2023-12-19T08:24:04.000Z
+                    systemVersion: "8.1"
+                    osVersion: 7.8.9
+                    ssid: MyWiFi
+                    macAddress: 00:11:22:33:44:55
+                    randomizedMacAddress: 00:11:22:33:44:55
+                    storageSpaceFreeGb: 10.5
+                    storageSpaceTotalGb: 64
+                    batteryHealth: GOOD
+                    batteryCharging: true
+                    batteryPercentage: 100
+                    batteryTemperatureC: 25
+                    ipAddress: 10.42.58.100
+                    signalStrength: 99
+                    frequencyMhz: 2437
+                    linkSpeedMbps: 72
+                    lastLocationLatitude: 37.7749
+                    lastLocationLongitude: -122.4194
+                    lastLocationAt: 2023-12-19T08:24:04.000Z
                 Example2:
                   value:
                     id: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
@@ -1781,6 +2152,27 @@ paths:
                     - sound stage
                     lastCommunicatedAt: 2023-12-22T17:11:47.423Z
                     isOnline: false
+                    clientVersion: 1.2.3
+                    launcherVersion: 4.5.6
+                    enrollmentDate: 2023-12-22T17:11:47.423Z
+                    systemVersion: "8.1"
+                    osVersion: 1.2.3
+                    ssid: MyWiFi
+                    macAddress: 00:11:22:33:44:55
+                    randomizedMacAddress: 00:11:22:33:44:55
+                    storageSpaceFreeGb: 10.5
+                    storageSpaceTotalGb: 64
+                    batteryHealth: Good
+                    batteryCharging: true
+                    batteryPercentage: 100
+                    batteryTemperatureC: 25
+                    ipAddress: 10.42.58.100
+                    signalStrength: 99
+                    frequencyMhz: 2437
+                    linkSpeedMbps: 72
+                    lastLocationLatitude: 37.7749
+                    lastLocationLongitude: -122.4194
+                    lastLocationAt: 2023-12-22T17:11:47.423Z
               schema:
                 $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
           description: ""
@@ -1898,6 +2290,27 @@ paths:
                     - pico
                     lastCommunicatedAt: 2023-12-19T08:24:04.000Z
                     isOnline: true
+                    clientVersion: 1.2.3
+                    launcherVersion: 4.5.6
+                    enrollmentDate: 2023-12-19T08:24:04.000Z
+                    systemVersion: "8.1"
+                    osVersion: 7.8.9
+                    ssid: MyWiFi
+                    macAddress: 00:11:22:33:44:55
+                    randomizedMacAddress: 00:11:22:33:44:55
+                    storageSpaceFreeGb: 10.5
+                    storageSpaceTotalGb: 64
+                    batteryHealth: GOOD
+                    batteryCharging: true
+                    batteryPercentage: 100
+                    batteryTemperatureC: 25
+                    ipAddress: 10.42.58.100
+                    signalStrength: 99
+                    frequencyMhz: 2437
+                    linkSpeedMbps: 72
+                    lastLocationLatitude: 37.7749
+                    lastLocationLongitude: -122.4194
+                    lastLocationAt: 2023-12-19T08:24:04.000Z
                 Example2:
                   value:
                     id: 343def19-414f-424d-8b54-7b46464b61e4
@@ -1908,6 +2321,27 @@ paths:
                     tags: []
                     lastCommunicatedAt: 2024-01-04T15:07:12.423Z
                     isOnline: false
+                    clientVersion: 1.2.3
+                    launcherVersion: 4.5.6
+                    enrollmentDate: 2024-01-04T15:07:12.423Z
+                    systemVersion: "8.1"
+                    osVersion: 1.2.3
+                    ssid: MyWiFi
+                    macAddress: 00:11:22:33:44:55
+                    randomizedMacAddress: 00:11:22:33:44:55
+                    storageSpaceFreeGb: 10.5
+                    storageSpaceTotalGb: 64
+                    batteryHealth: Good
+                    batteryCharging: true
+                    batteryPercentage: 100
+                    batteryTemperatureC: 25
+                    ipAddress: 10.42.58.100
+                    signalStrength: 99
+                    frequencyMhz: 2437
+                    linkSpeedMbps: 72
+                    lastLocationLatitude: 37.7749
+                    lastLocationLongitude: -122.4194
+                    lastLocationAt: 2024-01-04T15:07:12.423Z
               schema:
                 $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
           description: ""
@@ -2009,6 +2443,221 @@ paths:
                 Example1:
                   value:
                     message: App not installed on device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /devices/{deviceId}/fingerprint:
+    post:
+      description: Check the device fingerprint from the device API
+      operationId: devices_checkFingerprint
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  fingerprint: a1b2c3d4e5f6g7h8i9j0
+              Example2:
+                value:
+                  fingerprint: abadkeythatdoesntexist
+            schema:
+              $ref: '#/components/schemas/devices_checkFingerprint_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Invalid secure app key
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+  /devices/{deviceId}/release-channels:
+    delete:
+      description: Remove a release channel from a device.
+      operationId: devices_removeReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example4:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  releaseChannelId: 9d6a9043-e469-4239-9cc5-147fb20905d9
+              Example2:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example3:
+                value:
+                  releaseChannelId: 343def19-414f-eeee-8b54-7b46464b61e4
+              Example4:
+                value:
+                  releaseChannelId: 343def19-414f-eeee-8b54-7b46464b61e4
+            schema:
+              $ref: '#/components/schemas/deviceGroups_addReleaseChannel_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Unable to reboot device
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorBody'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Devices
+    post:
+      description: Add a release channel to a device.
+      operationId: devices_addReleaseChannel
+      parameters:
+      - examples:
+          Example1:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example2:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example3:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+          Example4:
+            value: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
+        explode: false
+        in: path
+        name: deviceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example1:
+                value:
+                  releaseChannelId: 9d6a9043-e469-4239-9cc5-147fb20905d9
+              Example2:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example3:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+              Example4:
+                value:
+                  releaseChannelId: 343def19-414f-424d-8b54-7b46464b61e4
+            schema:
+              $ref: '#/components/schemas/deviceGroups_addReleaseChannel_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Unable to reboot device
               schema:
                 $ref: '#/components/schemas/BadRequestErrorBody'
           description: ""
@@ -2264,6 +2913,316 @@ paths:
       - BearerAuth: []
       tags:
       - Files
+  /invite-users:
+    post:
+      description: Invite a user.
+      operationId: inviteUsers_inviteUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/inviteUsers_inviteUser_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - InviteUsers
+  /organization-roles:
+    get:
+      description: Get a paginated list of organization roles.
+      operationId: organizationRoles_organizationRoles
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                      title: Organization Owner
+                    - id: 1bd91c75-f385-4644-a94d-102edee94a5f
+                      title: Member
+                    links:
+                      first: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/organization-roles?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/organization-roles
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/OrganizationRolesResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - OrganizationRoles
+  /organization-roles/{organizationRoleId}:
+    get:
+      description: Get a organization role by id.
+      operationId: organizationRoles_organizationRole
+      parameters:
+      - examples:
+          Example1:
+            value: 660c96fc-8775-49ae-9bf0-863c37cf528f
+          Example2:
+            value: ff780177-5f73-4e21-9d49-4a6bd8f523c6
+          Example3:
+            value: 1b2b3b4b-5b6b-7b8b-9b0b-b1b2b3b4b5b6
+          Example4:
+            value: 1b2b3b4b-5b6b-7b8b-9b0b-b1b2b3b4b5b6
+        explode: false
+        in: path
+        name: organizationRoleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                    title: Organization Owner
+                Example2:
+                  value:
+                    id: 1bd91c75-f385-4644-a94d-102edee94a5f
+                    title: Member
+              schema:
+                $ref: '#/components/schemas/OrganizationRole'
+          description: ""
+        "403":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Forbidden
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorBody'
+          description: ""
+        "404":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    message: Not Found
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorBody'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - OrganizationRoles
+  /users:
+    get:
+      description: Get a paginated list of users.
+      operationId: users_users
+      parameters:
+      - examples:
+          Example1:
+            value: 2
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      - examples:
+          Example1:
+            value: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          nullable: true
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example1:
+                  value:
+                    data:
+                    - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                      firstName: john
+                      lastName: doe
+                      email: john@doe.org
+                      organizationRole:
+                        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+                        title: Organization Owner
+                      createdAt: 2021-01-01T00:00:00.000Z
+                      updatedAt: 2021-01-01T00:00:00.000Z
+                    links:
+                      first: https://api.xrdm.app/api/v2/users?per_page=2&page=1
+                      last: https://api.xrdm.app/api/v2/users?per_page=2&page=2
+                      prev: null
+                      next: https://api.xrdm.app/api/v2/users?per_page=2&page=2
+                    meta:
+                      current_page: 1
+                      from: 1
+                      last_page: 2
+                      links:
+                      - url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/users?per_page=2&page=1
+                        label: "1"
+                        active: true
+                      - url: https://api.xrdm.app/api/v2/users?per_page=2&page=2
+                        label: "2"
+                        active: false
+                      - url: https://api.xrdm.app/api/v2/users?per_page=2&page=2
+                        label: Next &raquo;
+                        active: false
+                      path: https://api.xrdm.app/api/v2/users
+                      per_page: 2
+                      to: 2
+                      total: 4
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Users
+    post:
+      description: Create a user.
+      operationId: users_createUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_createUser_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Users
+  /users/{userId}:
+    delete:
+      description: Delete a user by ID.
+      operationId: users_deleteUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Users
+    get:
+      description: Get a user by ID.
+      operationId: users_user
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Users
+    put:
+      description: Update a user by ID.
+      operationId: users_updateUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_updateUser_request'
+        required: true
+      responses:
+        "204":
+          description: ""
+      security:
+      - BearerAuth: []
+      tags:
+      - Users
 components:
   schemas:
     NotFoundErrorBody:
@@ -2961,6 +3920,15 @@ components:
       - meta
       title: ReleaseChannelsResponse
       type: object
+    ReleaseChannelSharingResponse:
+      description: A message indicating the sharing status of the release channel.
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: ReleaseChannelSharingResponse
+      type: object
     VersionsResponse:
       description: A paginated list of app versions.
       example:
@@ -2971,14 +3939,14 @@ components:
           downloadUrl: downloadUrl
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           version: 2.0.0-prealpha+328
-          status: null
+          status: ERROR
         - code: 0
           size: size
           added: 2021-01-01T00:00:00Z
           downloadUrl: downloadUrl
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           version: 2.0.0-prealpha+328
-          status: null
+          status: ERROR
         meta:
           path: path
           per_page: 5
@@ -3101,24 +4069,68 @@ components:
       description: A paginated list of devices.
       example:
         data:
-        - serialNumber: F233SJR96590SA
-          lastCommunicatedAt: 2023-12-19T08:24:04Z
+        - storageSpaceFreeGb: 10.5
+          linkSpeedMbps: 72
+          enrollmentDate: 2023-12-19T08:24:04Z
+          isOnline: true
+          title: Sim Station Pico
+          clientVersion: 1.2.3
+          randomizedMacAddress: 00:11:22:33:44:55
+          systemVersion: "8.1"
+          ssid: MyWiFi
+          launcherVersion: 4.5.6
+          osVersion: 1.2.3
           model: Pico Neo 3
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
-          title: Sim Station Pico
-          deviceGroup: deviceGroup
+          batteryHealth: GOOD
+          lastLocationLongitude: -122.4194
+          serialNumber: F233SJR96590SA
+          lastLocationAt: 2023-12-19T08:24:04Z
+          signalStrength: 99
+          ipAddress: 10.24.58.100
+          storageSpaceTotalGb: 64
+          frequencyMhz: 2437
           tags:
           - midwest
           - pico
-        - serialNumber: F233SJR96590SA
+          macAddress: 00:11:22:33:44:55
+          lastLocationLatitude: 37.7749
           lastCommunicatedAt: 2023-12-19T08:24:04Z
+          batteryTemperatureC: 25
+          batteryPercentage: 100
+          deviceGroup: deviceGroup
+          batteryCharging: true
+        - storageSpaceFreeGb: 10.5
+          linkSpeedMbps: 72
+          enrollmentDate: 2023-12-19T08:24:04Z
+          isOnline: true
+          title: Sim Station Pico
+          clientVersion: 1.2.3
+          randomizedMacAddress: 00:11:22:33:44:55
+          systemVersion: "8.1"
+          ssid: MyWiFi
+          launcherVersion: 4.5.6
+          osVersion: 1.2.3
           model: Pico Neo 3
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
-          title: Sim Station Pico
-          deviceGroup: deviceGroup
+          batteryHealth: GOOD
+          lastLocationLongitude: -122.4194
+          serialNumber: F233SJR96590SA
+          lastLocationAt: 2023-12-19T08:24:04Z
+          signalStrength: 99
+          ipAddress: 10.24.58.100
+          storageSpaceTotalGb: 64
+          frequencyMhz: 2437
           tags:
           - midwest
           - pico
+          macAddress: 00:11:22:33:44:55
+          lastLocationLatitude: 37.7749
+          lastCommunicatedAt: 2023-12-19T08:24:04Z
+          batteryTemperatureC: 25
+          batteryPercentage: 100
+          deviceGroup: deviceGroup
+          batteryCharging: true
         meta:
           path: path
           per_page: 5
@@ -3250,6 +4262,106 @@ components:
       - meta
       title: DeviceGroupsResponse
       type: object
+    UsersResponse:
+      description: A paginated list of users.
+      example:
+        data:
+        - firstName: john
+          lastName: doe
+          createdAt: 2021-01-01T00:00:00Z
+          organizationRole:
+            id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+            title: Organization Owner
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          email: john@doe.org
+          updatedAt: 2021-01-01T00:00:00Z
+        - firstName: john
+          lastName: doe
+          createdAt: 2021-01-01T00:00:00Z
+          organizationRole:
+            id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+            title: Organization Owner
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          email: john@doe.org
+          updatedAt: 2021-01-01T00:00:00Z
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: UsersResponse
+      type: object
+    OrganizationRolesResponse:
+      description: A paginated list of organization roles.
+      example:
+        data:
+        - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          title: Organization Owner
+        - id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          title: Organization Owner
+        meta:
+          path: path
+          per_page: 5
+          total: 2
+          last_page: 1
+          from: 6
+          links:
+          - active: true
+            label: label
+            url: url
+          - active: true
+            label: label
+            url: url
+          to: 5
+          current_page: 0
+        links:
+          next: next
+          last: last
+          prev: prev
+          first: first
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OrganizationRole'
+          type: array
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      - links
+      - meta
+      title: OrganizationRolesResponse
+      type: object
     App:
       description: Represents an app in your content library.
       properties:
@@ -3318,7 +4430,7 @@ components:
         downloadUrl: downloadUrl
         id: 9d6a9043-e469-4239-9cc5-147fb20905d9
         version: 2.0.0-prealpha+328
-        status: null
+        status: ERROR
       properties:
         id:
           example: 9d6a9043-e469-4239-9cc5-147fb20905d9
@@ -3376,15 +4488,37 @@ components:
     Device:
       description: Represents a device that is managed by your organization.
       example:
-        serialNumber: F233SJR96590SA
-        lastCommunicatedAt: 2023-12-19T08:24:04Z
+        storageSpaceFreeGb: 10.5
+        linkSpeedMbps: 72
+        enrollmentDate: 2023-12-19T08:24:04Z
+        isOnline: true
+        title: Sim Station Pico
+        clientVersion: 1.2.3
+        randomizedMacAddress: 00:11:22:33:44:55
+        systemVersion: "8.1"
+        ssid: MyWiFi
+        launcherVersion: 4.5.6
+        osVersion: 1.2.3
         model: Pico Neo 3
         id: 9d6a9043-e469-4239-9cc5-147fb20905d9
-        title: Sim Station Pico
-        deviceGroup: deviceGroup
+        batteryHealth: GOOD
+        lastLocationLongitude: -122.4194
+        serialNumber: F233SJR96590SA
+        lastLocationAt: 2023-12-19T08:24:04Z
+        signalStrength: 99
+        ipAddress: 10.24.58.100
+        storageSpaceTotalGb: 64
+        frequencyMhz: 2437
         tags:
         - midwest
         - pico
+        macAddress: 00:11:22:33:44:55
+        lastLocationLatitude: 37.7749
+        lastCommunicatedAt: 2023-12-19T08:24:04Z
+        batteryTemperatureC: 25
+        batteryPercentage: 100
+        deviceGroup: deviceGroup
+        batteryCharging: true
       properties:
         id:
           example: 9d6a9043-e469-4239-9cc5-147fb20905d9
@@ -3413,11 +4547,105 @@ components:
           example: 2023-12-19T08:24:04Z
           format: date-time
           type: string
+        isOnline:
+          example: true
+          type: boolean
+        clientVersion:
+          example: 1.2.3
+          type: string
+        launcherVersion:
+          example: 4.5.6
+          type: string
+        enrollmentDate:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
+        systemVersion:
+          example: "8.1"
+          type: string
+        osVersion:
+          example: 1.2.3
+          type: string
+        ssid:
+          example: MyWiFi
+          type: string
+        macAddress:
+          example: 00:11:22:33:44:55
+          type: string
+        randomizedMacAddress:
+          example: 00:11:22:33:44:55
+          type: string
+        storageSpaceFreeGb:
+          example: 10.5
+          format: double
+          type: number
+        storageSpaceTotalGb:
+          example: 64
+          format: double
+          type: number
+        batteryHealth:
+          example: GOOD
+          type: string
+        batteryCharging:
+          example: true
+          type: boolean
+        batteryPercentage:
+          example: 100
+          type: integer
+        batteryTemperatureC:
+          example: 25
+          type: integer
+        ipAddress:
+          example: 10.24.58.100
+          type: string
+        signalStrength:
+          example: 99
+          type: integer
+        frequencyMhz:
+          example: 2437
+          type: integer
+        linkSpeedMbps:
+          example: 72
+          type: integer
+        lastLocationLatitude:
+          example: 37.7749
+          format: double
+          type: number
+        lastLocationLongitude:
+          example: -122.4194
+          format: double
+          type: number
+        lastLocationAt:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
       required:
+      - batteryCharging
+      - batteryHealth
+      - batteryPercentage
+      - batteryTemperatureC
+      - clientVersion
+      - enrollmentDate
+      - frequencyMhz
       - id
+      - ipAddress
+      - isOnline
       - lastCommunicatedAt
+      - lastLocationAt
+      - lastLocationLatitude
+      - lastLocationLongitude
+      - launcherVersion
+      - linkSpeedMbps
+      - macAddress
       - model
+      - osVersion
+      - randomizedMacAddress
       - serialNumber
+      - signalStrength
+      - ssid
+      - storageSpaceFreeGb
+      - storageSpaceTotalGb
+      - systemVersion
       - tags
       - title
       title: Device
@@ -3426,18 +4654,39 @@ components:
       description: Represents a device that is managed by your organization with a
         simplified group object and connectivity status.
       example:
-        serialNumber: F233SJR96590SA
-        lastCommunicatedAt: 2023-12-19T08:24:04Z
-        model: Pico Neo 3
+        storageSpaceFreeGb: 10.5
+        linkSpeedMbps: 72
+        enrollmentDate: 2023-12-19T08:24:04Z
         isOnline: true
-        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
         title: Sim Station Pico
-        deviceGroup:
-          id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
-          title: Midwest Office
+        clientVersion: 1.2.3
+        randomizedMacAddress: 00:11:22:33:44:55
+        systemVersion: "8.1"
+        ssid: MyWiFi
+        launcherVersion: 4.5.6
+        osVersion: 7.8.9
+        model: Pico Neo 3
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        batteryHealth: GOOD
+        lastLocationLongitude: -122.4194
+        serialNumber: F233SJR96590SA
+        lastLocationAt: 2023-12-19T08:24:04Z
+        signalStrength: 99
+        ipAddress: 10.42.58.100
+        storageSpaceTotalGb: 64
+        frequencyMhz: 2437
         tags:
         - midwest
         - pico
+        macAddress: 00:11:22:33:44:55
+        lastLocationLatitude: 37.7749
+        lastCommunicatedAt: 2023-12-19T08:24:04Z
+        batteryTemperatureC: 25
+        batteryPercentage: 100
+        deviceGroup:
+          id: b6c2f1c5-db3d-471e-b7d5-ef9805406c5e
+          title: Midwest Office
+        batteryCharging: true
       properties:
         id:
           example: 9d6a9043-e469-4239-9cc5-147fb20905d9
@@ -3468,12 +4717,102 @@ components:
         isOnline:
           example: true
           type: boolean
+        clientVersion:
+          example: 1.2.3
+          type: string
+        launcherVersion:
+          example: 4.5.6
+          type: string
+        enrollmentDate:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
+        systemVersion:
+          example: "8.1"
+          type: string
+        osVersion:
+          example: 7.8.9
+          type: string
+        ssid:
+          example: MyWiFi
+          type: string
+        macAddress:
+          example: 00:11:22:33:44:55
+          type: string
+        randomizedMacAddress:
+          example: 00:11:22:33:44:55
+          type: string
+        storageSpaceFreeGb:
+          example: 10.5
+          format: double
+          type: number
+        storageSpaceTotalGb:
+          example: 64
+          format: double
+          type: number
+        batteryHealth:
+          example: GOOD
+          type: string
+        batteryCharging:
+          example: true
+          type: boolean
+        batteryPercentage:
+          example: 100
+          type: integer
+        batteryTemperatureC:
+          example: 25
+          type: integer
+        ipAddress:
+          example: 10.42.58.100
+          type: string
+        signalStrength:
+          example: 99
+          type: integer
+        frequencyMhz:
+          example: 2437
+          type: integer
+        linkSpeedMbps:
+          example: 72
+          type: integer
+        lastLocationLatitude:
+          example: 37.7749
+          format: double
+          type: number
+        lastLocationLongitude:
+          example: -122.4194
+          format: double
+          type: number
+        lastLocationAt:
+          example: 2023-12-19T08:24:04Z
+          format: date-time
+          type: string
       required:
+      - batteryCharging
+      - batteryHealth
+      - batteryPercentage
+      - batteryTemperatureC
+      - clientVersion
+      - enrollmentDate
+      - frequencyMhz
       - id
+      - ipAddress
       - isOnline
       - lastCommunicatedAt
+      - lastLocationAt
+      - lastLocationLatitude
+      - lastLocationLongitude
+      - launcherVersion
+      - linkSpeedMbps
+      - macAddress
       - model
+      - osVersion
+      - randomizedMacAddress
       - serialNumber
+      - signalStrength
+      - ssid
+      - storageSpaceFreeGb
+      - storageSpaceTotalGb
+      - systemVersion
       - tags
       - title
       title: DeviceWithSimplifiedDeviceGroup
@@ -3579,6 +4918,24 @@ components:
       - deviceIds
       title: FileWithDeviceIds
       type: object
+    OrganizationRole:
+      description: Represents a role in your organization.
+      example:
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        title: Organization Owner
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        title:
+          example: Organization Owner
+          type: string
+      required:
+      - id
+      - title
+      title: OrganizationRole
+      type: object
     ReleaseChannel:
       description: Represents a release channel that is designated in your organization.
       example:
@@ -3610,13 +4967,74 @@ components:
           downloadUrl: downloadUrl
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           version: 2.0.0-prealpha+328
-          status: null
+          status: ERROR
       properties:
         version:
           $ref: '#/components/schemas/AppVersion'
       required:
       - version
       title: ReleaseChannelWithVersion
+      type: object
+    ReleaseChannelShared:
+      description: Represents a response indicating the sharing status of a release
+        channel.
+      example:
+        message: The release channel has been shared with the specified organization
+          slug.
+      properties:
+        message:
+          example: The release channel has been shared with the specified organization
+            slug.
+          type: string
+      required:
+      - message
+      title: ReleaseChannelShared
+      type: object
+    User:
+      description: Represents a user in your organization.
+      example:
+        firstName: john
+        lastName: doe
+        createdAt: 2021-01-01T00:00:00Z
+        organizationRole:
+          id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          title: Organization Owner
+        id: 9d6a9043-e469-4239-9cc5-147fb20905d9
+        email: john@doe.org
+        updatedAt: 2021-01-01T00:00:00Z
+      properties:
+        id:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+        firstName:
+          example: john
+          type: string
+        lastName:
+          example: doe
+          type: string
+        email:
+          example: john@doe.org
+          type: string
+        organizationRole:
+          $ref: '#/components/schemas/OrganizationRole'
+        createdAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        updatedAt:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+      required:
+      - createdAt
+      - email
+      - firstName
+      - id
+      - lastName
+      - organizationRole
+      - updatedAt
+      title: User
       type: object
     apps_updateApp_request:
       properties:
@@ -3697,6 +5115,31 @@ components:
       required:
       - versionId
       type: object
+    apps_shareReleaseChannel_request:
+      properties:
+        organizationSlug:
+          example: my-org
+          type: string
+      required:
+      - organizationSlug
+      type: object
+    apps_revokeReleaseChannel_request:
+      properties:
+        organizationSlug:
+          example: a-good-org-slug
+          type: string
+      required:
+      - organizationSlug
+      type: object
+    deviceGroups_addReleaseChannel_request:
+      properties:
+        releaseChannelId:
+          example: 9d6a9043-e469-4239-9cc5-147fb20905d9
+          format: uuid
+          type: string
+      required:
+      - releaseChannelId
+      type: object
     devices_updateDevice_request:
       properties:
         title:
@@ -3711,6 +5154,61 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    devices_checkFingerprint_request:
+      properties:
+        fingerprint:
+          example: a1b2c3d4e5f6g7h8i9j0
+          type: string
+      required:
+      - fingerprint
+      type: object
+    inviteUsers_inviteUser_request:
+      properties:
+        email:
+          type: string
+        organizationRoleId:
+          format: uuid
+          nullable: true
+          type: string
+        sso:
+          nullable: true
+          type: boolean
+      required:
+      - email
+      type: object
+    users_createUser_request:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        organizationRoleId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+    users_updateUser_request:
+      properties:
+        firstName:
+          nullable: true
+          type: string
+        lastName:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        organizationRoleId:
+          format: uuid
+          nullable: true
+          type: string
       type: object
   securitySchemes:
     BearerAuth:

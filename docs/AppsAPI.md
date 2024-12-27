@@ -10,6 +10,8 @@ Method | HTTP request | Description
 [**AppsPreSignVersionUploadUrl**](AppsAPI.md#AppsPreSignVersionUploadUrl) | **Post** /apps/{appId}/versions/{versionId}/pre-sign | 
 [**AppsReleaseChannel**](AppsAPI.md#AppsReleaseChannel) | **Get** /apps/{appId}/release-channels/{releaseChannelId} | 
 [**AppsReleaseChannels**](AppsAPI.md#AppsReleaseChannels) | **Get** /apps/{appId}/release-channels | 
+[**AppsRevokeReleaseChannel**](AppsAPI.md#AppsRevokeReleaseChannel) | **Delete** /apps/{appId}/release-channels/{releaseChannelId}/share | 
+[**AppsShareReleaseChannel**](AppsAPI.md#AppsShareReleaseChannel) | **Post** /apps/{appId}/release-channels/{releaseChannelId}/share | 
 [**AppsStartVersionUpload**](AppsAPI.md#AppsStartVersionUpload) | **Post** /apps/{appId}/versions | 
 [**AppsUpdateApp**](AppsAPI.md#AppsUpdateApp) | **Put** /apps/{appId} | 
 [**AppsUpdateReleaseChannel**](AppsAPI.md#AppsUpdateReleaseChannel) | **Put** /apps/{appId}/release-channels/{releaseChannelId} | 
@@ -445,6 +447,156 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AppsRevokeReleaseChannel
+
+> ReleaseChannelShared AppsRevokeReleaseChannel(ctx, appId, releaseChannelId).AppsRevokeReleaseChannelRequest(appsRevokeReleaseChannelRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/heru-inc/arbor-api-go"
+)
+
+func main() {
+	appId := "9d6a9043-e469-4239-9cc5-147fb20905d9" // string | 
+	releaseChannelId := "9d6a9043-e469-4239-9cc5-147fb20905d9" // string | 
+	appsRevokeReleaseChannelRequest := *openapiclient.NewAppsRevokeReleaseChannelRequest("a-good-org-slug") // AppsRevokeReleaseChannelRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.AppsRevokeReleaseChannel(context.Background(), appId, releaseChannelId).AppsRevokeReleaseChannelRequest(appsRevokeReleaseChannelRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.AppsRevokeReleaseChannel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AppsRevokeReleaseChannel`: ReleaseChannelShared
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.AppsRevokeReleaseChannel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** |  | 
+**releaseChannelId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAppsRevokeReleaseChannelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **appsRevokeReleaseChannelRequest** | [**AppsRevokeReleaseChannelRequest**](AppsRevokeReleaseChannelRequest.md) |  | 
+
+### Return type
+
+[**ReleaseChannelShared**](ReleaseChannelShared.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AppsShareReleaseChannel
+
+> ReleaseChannelShared AppsShareReleaseChannel(ctx, appId, releaseChannelId).AppsShareReleaseChannelRequest(appsShareReleaseChannelRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/heru-inc/arbor-api-go"
+)
+
+func main() {
+	appId := "9d6a9043-e469-4239-9cc5-147fb20905d9" // string | 
+	releaseChannelId := "9d6a9043-e469-4239-9cc5-147fb20905d9" // string | 
+	appsShareReleaseChannelRequest := *openapiclient.NewAppsShareReleaseChannelRequest("my-org") // AppsShareReleaseChannelRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AppsAPI.AppsShareReleaseChannel(context.Background(), appId, releaseChannelId).AppsShareReleaseChannelRequest(appsShareReleaseChannelRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AppsAPI.AppsShareReleaseChannel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AppsShareReleaseChannel`: ReleaseChannelShared
+	fmt.Fprintf(os.Stdout, "Response from `AppsAPI.AppsShareReleaseChannel`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**appId** | **string** |  | 
+**releaseChannelId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAppsShareReleaseChannelRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **appsShareReleaseChannelRequest** | [**AppsShareReleaseChannelRequest**](AppsShareReleaseChannelRequest.md) |  | 
+
+### Return type
+
+[**ReleaseChannelShared**](ReleaseChannelShared.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
