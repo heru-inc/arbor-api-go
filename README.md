@@ -1,4 +1,4 @@
-# Go API client for arbor-api-go
+# Go API client for arborapi
 
 This API provides a RESTful interface to interact with your organization's data.
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import arbor-api-go "github.com/heru-inc/arbor-api-go"
+import arborapi "github.com/heru-inc/arbor-api-go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -37,18 +37,18 @@ Default configuration comes with `Servers` field that contains server objects as
 
 ### Select Server Configuration
 
-For using other server than the one defined on index 0 set context value `arbor-api-go.ContextServerIndex` of type `int`.
+For using other server than the one defined on index 0 set context value `arborapi.ContextServerIndex` of type `int`.
 
 ```go
-ctx := context.WithValue(context.Background(), arbor-api-go.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), arborapi.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
 
-Templated server URL is formatted using default variables from configuration or from context value `arbor-api-go.ContextServerVariables` of type `map[string]string`.
+Templated server URL is formatted using default variables from configuration or from context value `arborapi.ContextServerVariables` of type `map[string]string`.
 
 ```go
-ctx := context.WithValue(context.Background(), arbor-api-go.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), arborapi.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -59,13 +59,13 @@ Note, enum values are always validated and all unused variables are silently ign
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
 An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `arbor-api-go.ContextOperationServerIndices` and `arbor-api-go.ContextOperationServerVariables` context maps.
+Similar rules for overriding default operation server index and variables applies by using `arborapi.ContextOperationServerIndices` and `arborapi.ContextOperationServerVariables` context maps.
 
 ```go
-ctx := context.WithValue(context.Background(), arbor-api-go.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), arborapi.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), arbor-api-go.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), arborapi.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -192,7 +192,7 @@ Authentication schemes defined for the API:
 Example
 
 ```go
-auth := context.WithValue(context.Background(), arbor-api-go.ContextAccessToken, "BEARER_TOKEN_STRING")
+auth := context.WithValue(context.Background(), arborapi.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 
