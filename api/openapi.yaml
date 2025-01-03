@@ -2007,8 +2007,8 @@ paths:
                       signalStrength: 99
                       frequencyMhz: 2437
                       linkSpeedMbps: 72
-                      lastLocationLatitude: 37.7749
-                      lastLocationLongitude: -122.4194
+                      lastLocationLatitude: "37.7749"
+                      lastLocationLongitude: "-122.4194"
                       lastLocationAt: 2023-12-19T08:24:04.000Z
                     - id: 1ca42d4c-558a-4b50-a1e4-4b2fc7f70adc
                       title: Sound Stage Quest
@@ -2040,8 +2040,8 @@ paths:
                       signalStrength: 99
                       frequencyMhz: 2437
                       linkSpeedMbps: 72
-                      lastLocationLatitude: 37.7749
-                      lastLocationLongitude: -122.4194
+                      lastLocationLatitude: "37.7749"
+                      lastLocationLongitude: "-122.4194"
                       lastLocationAt: 2023-12-22T17:11:47.423Z
                     links:
                       first: https://api.xrdm.app/api/v2/devices?per_page=2&page=1
@@ -2135,8 +2135,8 @@ paths:
                     signalStrength: 99
                     frequencyMhz: 2437
                     linkSpeedMbps: 72
-                    lastLocationLatitude: 37.7749
-                    lastLocationLongitude: -122.4194
+                    lastLocationLatitude: "37.7749"
+                    lastLocationLongitude: "-122.4194"
                     lastLocationAt: 2023-12-19T08:24:04.000Z
                 Example2:
                   value:
@@ -2170,8 +2170,8 @@ paths:
                     signalStrength: 99
                     frequencyMhz: 2437
                     linkSpeedMbps: 72
-                    lastLocationLatitude: 37.7749
-                    lastLocationLongitude: -122.4194
+                    lastLocationLatitude: "37.7749"
+                    lastLocationLongitude: "-122.4194"
                     lastLocationAt: 2023-12-22T17:11:47.423Z
               schema:
                 $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
@@ -2308,8 +2308,8 @@ paths:
                     signalStrength: 99
                     frequencyMhz: 2437
                     linkSpeedMbps: 72
-                    lastLocationLatitude: 37.7749
-                    lastLocationLongitude: -122.4194
+                    lastLocationLatitude: "37.7749"
+                    lastLocationLongitude: "-122.4194"
                     lastLocationAt: 2023-12-19T08:24:04.000Z
                 Example2:
                   value:
@@ -2339,8 +2339,8 @@ paths:
                     signalStrength: 99
                     frequencyMhz: 2437
                     linkSpeedMbps: 72
-                    lastLocationLatitude: 37.7749
-                    lastLocationLongitude: -122.4194
+                    lastLocationLatitude: "37.7749"
+                    lastLocationLongitude: "-122.4194"
                     lastLocationAt: 2024-01-04T15:07:12.423Z
               schema:
                 $ref: '#/components/schemas/DeviceWithSimplifiedDeviceGroup'
@@ -4083,7 +4083,7 @@ components:
           model: Pico Neo 3
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           batteryHealth: GOOD
-          lastLocationLongitude: -122.4194
+          lastLocationLongitude: "-122.4194"
           serialNumber: F233SJR96590SA
           lastLocationAt: 2023-12-19T08:24:04Z
           signalStrength: 99
@@ -4094,7 +4094,7 @@ components:
           - midwest
           - pico
           macAddress: 00:11:22:33:44:55
-          lastLocationLatitude: 37.7749
+          lastLocationLatitude: "37.7749"
           lastCommunicatedAt: 2023-12-19T08:24:04Z
           batteryTemperatureC: 25
           batteryPercentage: 100
@@ -4114,7 +4114,7 @@ components:
           model: Pico Neo 3
           id: 9d6a9043-e469-4239-9cc5-147fb20905d9
           batteryHealth: GOOD
-          lastLocationLongitude: -122.4194
+          lastLocationLongitude: "-122.4194"
           serialNumber: F233SJR96590SA
           lastLocationAt: 2023-12-19T08:24:04Z
           signalStrength: 99
@@ -4125,7 +4125,7 @@ components:
           - midwest
           - pico
           macAddress: 00:11:22:33:44:55
-          lastLocationLatitude: 37.7749
+          lastLocationLatitude: "37.7749"
           lastCommunicatedAt: 2023-12-19T08:24:04Z
           batteryTemperatureC: 25
           batteryPercentage: 100
@@ -4502,7 +4502,7 @@ components:
         model: Pico Neo 3
         id: 9d6a9043-e469-4239-9cc5-147fb20905d9
         batteryHealth: GOOD
-        lastLocationLongitude: -122.4194
+        lastLocationLongitude: "-122.4194"
         serialNumber: F233SJR96590SA
         lastLocationAt: 2023-12-19T08:24:04Z
         signalStrength: 99
@@ -4513,7 +4513,7 @@ components:
         - midwest
         - pico
         macAddress: 00:11:22:33:44:55
-        lastLocationLatitude: 37.7749
+        lastLocationLatitude: "37.7749"
         lastCommunicatedAt: 2023-12-19T08:24:04Z
         batteryTemperatureC: 25
         batteryPercentage: 100
@@ -4609,15 +4609,13 @@ components:
           example: 72
           type: integer
         lastLocationLatitude:
-          example: 37.7749
-          format: double
+          example: "37.7749"
           nullable: true
-          type: number
+          type: string
         lastLocationLongitude:
-          example: -122.4194
-          format: double
+          example: "-122.4194"
           nullable: true
-          type: number
+          type: string
         lastLocationAt:
           example: 2023-12-19T08:24:04Z
           format: date-time
@@ -4672,7 +4670,7 @@ components:
         model: Pico Neo 3
         id: 9d6a9043-e469-4239-9cc5-147fb20905d9
         batteryHealth: GOOD
-        lastLocationLongitude: -122.4194
+        lastLocationLongitude: "-122.4194"
         serialNumber: F233SJR96590SA
         lastLocationAt: 2023-12-19T08:24:04Z
         signalStrength: 99
@@ -4683,7 +4681,7 @@ components:
         - midwest
         - pico
         macAddress: 00:11:22:33:44:55
-        lastLocationLatitude: 37.7749
+        lastLocationLatitude: "37.7749"
         lastCommunicatedAt: 2023-12-19T08:24:04Z
         batteryTemperatureC: 25
         batteryPercentage: 100
@@ -4780,15 +4778,13 @@ components:
           example: 72
           type: integer
         lastLocationLatitude:
-          example: 37.7749
-          format: double
+          example: "37.7749"
           nullable: true
-          type: number
+          type: string
         lastLocationLongitude:
-          example: -122.4194
-          format: double
+          example: "-122.4194"
           nullable: true
-          type: number
+          type: string
         lastLocationAt:
           example: 2023-12-19T08:24:04Z
           format: date-time

@@ -46,8 +46,8 @@ type DeviceWithSimplifiedDeviceGroup struct {
 	SignalStrength int32 `json:"signalStrength"`
 	FrequencyMhz int32 `json:"frequencyMhz"`
 	LinkSpeedMbps int32 `json:"linkSpeedMbps"`
-	LastLocationLatitude NullableFloat64 `json:"lastLocationLatitude"`
-	LastLocationLongitude NullableFloat64 `json:"lastLocationLongitude"`
+	LastLocationLatitude NullableString `json:"lastLocationLatitude"`
+	LastLocationLongitude NullableString `json:"lastLocationLongitude"`
 	LastLocationAt NullableTime `json:"lastLocationAt"`
 	AdditionalProperties map[string]interface{}
 }
@@ -58,7 +58,7 @@ type _DeviceWithSimplifiedDeviceGroup DeviceWithSimplifiedDeviceGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeviceWithSimplifiedDeviceGroup(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude NullableFloat64, lastLocationLongitude NullableFloat64, lastLocationAt NullableTime) *DeviceWithSimplifiedDeviceGroup {
+func NewDeviceWithSimplifiedDeviceGroup(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude NullableString, lastLocationLongitude NullableString, lastLocationAt NullableTime) *DeviceWithSimplifiedDeviceGroup {
 	this := DeviceWithSimplifiedDeviceGroup{}
 	this.Id = id
 	this.Title = title
@@ -732,10 +732,10 @@ func (o *DeviceWithSimplifiedDeviceGroup) SetLinkSpeedMbps(v int32) {
 }
 
 // GetLastLocationLatitude returns the LastLocationLatitude field value
-// If the value is explicit nil, the zero value for float64 will be returned
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitude() float64 {
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitude() string {
 	if o == nil || o.LastLocationLatitude.Get() == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -745,7 +745,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitude() float64 {
 // GetLastLocationLatitudeOk returns a tuple with the LastLocationLatitude field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitudeOk() (*float64, bool) {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitudeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -753,15 +753,15 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLatitudeOk() (*float64,
 }
 
 // SetLastLocationLatitude sets field value
-func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationLatitude(v float64) {
+func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationLatitude(v string) {
 	o.LastLocationLatitude.Set(&v)
 }
 
 // GetLastLocationLongitude returns the LastLocationLongitude field value
-// If the value is explicit nil, the zero value for float64 will be returned
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitude() float64 {
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitude() string {
 	if o == nil || o.LastLocationLongitude.Get() == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -771,7 +771,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitude() float64 {
 // GetLastLocationLongitudeOk returns a tuple with the LastLocationLongitude field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitudeOk() (*float64, bool) {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitudeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -779,7 +779,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationLongitudeOk() (*float64
 }
 
 // SetLastLocationLongitude sets field value
-func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationLongitude(v float64) {
+func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationLongitude(v string) {
 	o.LastLocationLongitude.Set(&v)
 }
 
