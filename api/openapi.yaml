@@ -4594,7 +4594,8 @@ components:
           type: integer
         batteryTemperatureC:
           example: 25
-          type: integer
+          format: double
+          type: number
         ipAddress:
           example: 10.24.58.100
           type: string
@@ -4761,7 +4762,8 @@ components:
           type: integer
         batteryTemperatureC:
           example: 25
-          type: integer
+          format: double
+          type: number
         ipAddress:
           example: 10.42.58.100
           type: string

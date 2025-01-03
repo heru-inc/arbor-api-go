@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **BatteryHealth** | **string** |  | 
 **BatteryCharging** | **bool** |  | 
 **BatteryPercentage** | **int32** |  | 
-**BatteryTemperatureC** | **int32** |  | 
+**BatteryTemperatureC** | **float64** |  | 
 **IpAddress** | **string** |  | 
 **SignalStrength** | **int32** |  | 
 **FrequencyMhz** | **int32** |  | 
@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewDevice
 
-`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time, ) *Device`
+`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time, ) *Device`
 
 NewDevice instantiates a new Device object
 This constructor will assign default values to properties that have it defined,
@@ -490,20 +490,20 @@ SetBatteryPercentage sets BatteryPercentage field to given value.
 
 ### GetBatteryTemperatureC
 
-`func (o *Device) GetBatteryTemperatureC() int32`
+`func (o *Device) GetBatteryTemperatureC() float64`
 
 GetBatteryTemperatureC returns the BatteryTemperatureC field if non-nil, zero value otherwise.
 
 ### GetBatteryTemperatureCOk
 
-`func (o *Device) GetBatteryTemperatureCOk() (*int32, bool)`
+`func (o *Device) GetBatteryTemperatureCOk() (*float64, bool)`
 
 GetBatteryTemperatureCOk returns a tuple with the BatteryTemperatureC field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBatteryTemperatureC
 
-`func (o *Device) SetBatteryTemperatureC(v int32)`
+`func (o *Device) SetBatteryTemperatureC(v float64)`
 
 SetBatteryTemperatureC sets BatteryTemperatureC field to given value.
 

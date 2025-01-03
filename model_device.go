@@ -41,7 +41,7 @@ type Device struct {
 	BatteryHealth string `json:"batteryHealth"`
 	BatteryCharging bool `json:"batteryCharging"`
 	BatteryPercentage int32 `json:"batteryPercentage"`
-	BatteryTemperatureC int32 `json:"batteryTemperatureC"`
+	BatteryTemperatureC float64 `json:"batteryTemperatureC"`
 	IpAddress string `json:"ipAddress"`
 	SignalStrength int32 `json:"signalStrength"`
 	FrequencyMhz int32 `json:"frequencyMhz"`
@@ -58,7 +58,7 @@ type _Device Device
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time) *Device {
+func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time) *Device {
 	this := Device{}
 	this.Id = id
 	this.Title = title
@@ -622,9 +622,9 @@ func (o *Device) SetBatteryPercentage(v int32) {
 }
 
 // GetBatteryTemperatureC returns the BatteryTemperatureC field value
-func (o *Device) GetBatteryTemperatureC() int32 {
+func (o *Device) GetBatteryTemperatureC() float64 {
 	if o == nil {
-		var ret int32
+		var ret float64
 		return ret
 	}
 
@@ -633,7 +633,7 @@ func (o *Device) GetBatteryTemperatureC() int32 {
 
 // GetBatteryTemperatureCOk returns a tuple with the BatteryTemperatureC field value
 // and a boolean to check if the value has been set.
-func (o *Device) GetBatteryTemperatureCOk() (*int32, bool) {
+func (o *Device) GetBatteryTemperatureCOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -641,7 +641,7 @@ func (o *Device) GetBatteryTemperatureCOk() (*int32, bool) {
 }
 
 // SetBatteryTemperatureC sets field value
-func (o *Device) SetBatteryTemperatureC(v int32) {
+func (o *Device) SetBatteryTemperatureC(v float64) {
 	o.BatteryTemperatureC = v
 }
 
