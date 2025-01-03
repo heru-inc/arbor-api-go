@@ -46,9 +46,9 @@ type Device struct {
 	SignalStrength int32 `json:"signalStrength"`
 	FrequencyMhz int32 `json:"frequencyMhz"`
 	LinkSpeedMbps int32 `json:"linkSpeedMbps"`
-	LastLocationLatitude float64 `json:"lastLocationLatitude"`
-	LastLocationLongitude float64 `json:"lastLocationLongitude"`
-	LastLocationAt Time `json:"lastLocationAt"`
+	LastLocationLatitude NullableFloat64 `json:"lastLocationLatitude"`
+	LastLocationLongitude NullableFloat64 `json:"lastLocationLongitude"`
+	LastLocationAt NullableTime `json:"lastLocationAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -58,7 +58,7 @@ type _Device Device
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time) *Device {
+func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude NullableFloat64, lastLocationLongitude NullableFloat64, lastLocationAt NullableTime) *Device {
 	this := Device{}
 	this.Id = id
 	this.Title = title
@@ -742,75 +742,81 @@ func (o *Device) SetLinkSpeedMbps(v int32) {
 }
 
 // GetLastLocationLatitude returns the LastLocationLatitude field value
+// If the value is explicit nil, the zero value for float64 will be returned
 func (o *Device) GetLastLocationLatitude() float64 {
-	if o == nil {
+	if o == nil || o.LastLocationLatitude.Get() == nil {
 		var ret float64
 		return ret
 	}
 
-	return o.LastLocationLatitude
+	return *o.LastLocationLatitude.Get()
 }
 
 // GetLastLocationLatitudeOk returns a tuple with the LastLocationLatitude field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Device) GetLastLocationLatitudeOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastLocationLatitude, true
+	return o.LastLocationLatitude.Get(), o.LastLocationLatitude.IsSet()
 }
 
 // SetLastLocationLatitude sets field value
 func (o *Device) SetLastLocationLatitude(v float64) {
-	o.LastLocationLatitude = v
+	o.LastLocationLatitude.Set(&v)
 }
 
 // GetLastLocationLongitude returns the LastLocationLongitude field value
+// If the value is explicit nil, the zero value for float64 will be returned
 func (o *Device) GetLastLocationLongitude() float64 {
-	if o == nil {
+	if o == nil || o.LastLocationLongitude.Get() == nil {
 		var ret float64
 		return ret
 	}
 
-	return o.LastLocationLongitude
+	return *o.LastLocationLongitude.Get()
 }
 
 // GetLastLocationLongitudeOk returns a tuple with the LastLocationLongitude field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Device) GetLastLocationLongitudeOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastLocationLongitude, true
+	return o.LastLocationLongitude.Get(), o.LastLocationLongitude.IsSet()
 }
 
 // SetLastLocationLongitude sets field value
 func (o *Device) SetLastLocationLongitude(v float64) {
-	o.LastLocationLongitude = v
+	o.LastLocationLongitude.Set(&v)
 }
 
 // GetLastLocationAt returns the LastLocationAt field value
+// If the value is explicit nil, the zero value for Time will be returned
 func (o *Device) GetLastLocationAt() Time {
-	if o == nil {
+	if o == nil || o.LastLocationAt.Get() == nil {
 		var ret Time
 		return ret
 	}
 
-	return o.LastLocationAt
+	return *o.LastLocationAt.Get()
 }
 
 // GetLastLocationAtOk returns a tuple with the LastLocationAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Device) GetLastLocationAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastLocationAt, true
+	return o.LastLocationAt.Get(), o.LastLocationAt.IsSet()
 }
 
 // SetLastLocationAt sets field value
 func (o *Device) SetLastLocationAt(v Time) {
-	o.LastLocationAt = v
+	o.LastLocationAt.Set(&v)
 }
 
 func (o Device) MarshalJSON() ([]byte, error) {
@@ -851,9 +857,9 @@ func (o Device) ToMap() (map[string]interface{}, error) {
 	toSerialize["signalStrength"] = o.SignalStrength
 	toSerialize["frequencyMhz"] = o.FrequencyMhz
 	toSerialize["linkSpeedMbps"] = o.LinkSpeedMbps
-	toSerialize["lastLocationLatitude"] = o.LastLocationLatitude
-	toSerialize["lastLocationLongitude"] = o.LastLocationLongitude
-	toSerialize["lastLocationAt"] = o.LastLocationAt
+	toSerialize["lastLocationLatitude"] = o.LastLocationLatitude.Get()
+	toSerialize["lastLocationLongitude"] = o.LastLocationLongitude.Get()
+	toSerialize["lastLocationAt"] = o.LastLocationAt.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

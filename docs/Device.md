@@ -30,15 +30,15 @@ Name | Type | Description | Notes
 **SignalStrength** | **int32** |  | 
 **FrequencyMhz** | **int32** |  | 
 **LinkSpeedMbps** | **int32** |  | 
-**LastLocationLatitude** | **float64** |  | 
-**LastLocationLongitude** | **float64** |  | 
-**LastLocationAt** | **Time** |  | 
+**LastLocationLatitude** | **NullableFloat64** |  | 
+**LastLocationLongitude** | **NullableFloat64** |  | 
+**LastLocationAt** | **NullableTime** |  | 
 
 ## Methods
 
 ### NewDevice
 
-`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time, ) *Device`
+`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC float64, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude NullableFloat64, lastLocationLongitude NullableFloat64, lastLocationAt NullableTime, ) *Device`
 
 NewDevice instantiates a new Device object
 This constructor will assign default values to properties that have it defined,
@@ -608,6 +608,16 @@ and a boolean to check if the value has been set.
 SetLastLocationLatitude sets LastLocationLatitude field to given value.
 
 
+### SetLastLocationLatitudeNil
+
+`func (o *Device) SetLastLocationLatitudeNil(b bool)`
+
+ SetLastLocationLatitudeNil sets the value for LastLocationLatitude to be an explicit nil
+
+### UnsetLastLocationLatitude
+`func (o *Device) UnsetLastLocationLatitude()`
+
+UnsetLastLocationLatitude ensures that no value is present for LastLocationLatitude, not even an explicit nil
 ### GetLastLocationLongitude
 
 `func (o *Device) GetLastLocationLongitude() float64`
@@ -628,6 +638,16 @@ and a boolean to check if the value has been set.
 SetLastLocationLongitude sets LastLocationLongitude field to given value.
 
 
+### SetLastLocationLongitudeNil
+
+`func (o *Device) SetLastLocationLongitudeNil(b bool)`
+
+ SetLastLocationLongitudeNil sets the value for LastLocationLongitude to be an explicit nil
+
+### UnsetLastLocationLongitude
+`func (o *Device) UnsetLastLocationLongitude()`
+
+UnsetLastLocationLongitude ensures that no value is present for LastLocationLongitude, not even an explicit nil
 ### GetLastLocationAt
 
 `func (o *Device) GetLastLocationAt() Time`
@@ -648,6 +668,16 @@ and a boolean to check if the value has been set.
 SetLastLocationAt sets LastLocationAt field to given value.
 
 
+### SetLastLocationAtNil
+
+`func (o *Device) SetLastLocationAtNil(b bool)`
+
+ SetLastLocationAtNil sets the value for LastLocationAt to be an explicit nil
+
+### UnsetLastLocationAt
+`func (o *Device) UnsetLastLocationAt()`
+
+UnsetLastLocationAt ensures that no value is present for LastLocationAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

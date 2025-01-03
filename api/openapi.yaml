@@ -4611,14 +4611,17 @@ components:
         lastLocationLatitude:
           example: 37.7749
           format: double
+          nullable: true
           type: number
         lastLocationLongitude:
           example: -122.4194
           format: double
+          nullable: true
           type: number
         lastLocationAt:
           example: 2023-12-19T08:24:04Z
           format: date-time
+          nullable: true
           type: string
       required:
       - batteryCharging
@@ -4779,14 +4782,17 @@ components:
         lastLocationLatitude:
           example: 37.7749
           format: double
+          nullable: true
           type: number
         lastLocationLongitude:
           example: -122.4194
           format: double
+          nullable: true
           type: number
         lastLocationAt:
           example: 2023-12-19T08:24:04Z
           format: date-time
+          nullable: true
           type: string
       required:
       - batteryCharging
