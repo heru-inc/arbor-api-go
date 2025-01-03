@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **LastName** | **string** |  | 
 **Email** | **string** |  | 
 **OrganizationRole** | [**OrganizationRole**](OrganizationRole.md) |  | 
-**CreatedAt** | **time.Time** |  | 
-**UpdatedAt** | **time.Time** |  | 
+**CreatedAt** | **Time** |  | 
+**UpdatedAt** | **Time** |  | 
 
 ## Methods
 
 ### NewUser
 
-`func NewUser(id string, firstName string, lastName string, email string, organizationRole OrganizationRole, createdAt time.Time, updatedAt time.Time, ) *User`
+`func NewUser(id string, firstName string, lastName string, email string, organizationRole OrganizationRole, createdAt Time, updatedAt Time, ) *User`
 
 NewUser instantiates a new User object
 This constructor will assign default values to properties that have it defined,
@@ -133,40 +133,40 @@ SetOrganizationRole sets OrganizationRole field to given value.
 
 ### GetCreatedAt
 
-`func (o *User) GetCreatedAt() time.Time`
+`func (o *User) GetCreatedAt() Time`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *User) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *User) GetCreatedAtOk() (*Time, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *User) SetCreatedAt(v time.Time)`
+`func (o *User) SetCreatedAt(v Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 
 ### GetUpdatedAt
 
-`func (o *User) GetUpdatedAt() time.Time`
+`func (o *User) GetUpdatedAt() Time`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *User) GetUpdatedAtOk() (*time.Time, bool)`
+`func (o *User) GetUpdatedAtOk() (*Time, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *User) SetUpdatedAt(v time.Time)`
+`func (o *User) SetUpdatedAt(v Time)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 

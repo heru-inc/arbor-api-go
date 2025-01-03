@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **DeviceGroup** | Pointer to **NullableString** |  | [optional] 
 **Model** | **string** |  | 
 **Tags** | **[]string** |  | 
-**LastCommunicatedAt** | **time.Time** |  | 
+**LastCommunicatedAt** | **Time** |  | 
 **IsOnline** | **bool** |  | 
 **ClientVersion** | **string** |  | 
 **LauncherVersion** | **string** |  | 
-**EnrollmentDate** | **time.Time** |  | 
+**EnrollmentDate** | **Time** |  | 
 **SystemVersion** | **string** |  | 
 **OsVersion** | **string** |  | 
 **Ssid** | **string** |  | 
@@ -32,13 +32,13 @@ Name | Type | Description | Notes
 **LinkSpeedMbps** | **int32** |  | 
 **LastLocationLatitude** | **float64** |  | 
 **LastLocationLongitude** | **float64** |  | 
-**LastLocationAt** | **time.Time** |  | 
+**LastLocationAt** | **Time** |  | 
 
 ## Methods
 
 ### NewDevice
 
-`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt time.Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate time.Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt time.Time, ) *Device`
+`func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time, ) *Device`
 
 NewDevice instantiates a new Device object
 This constructor will assign default values to properties that have it defined,
@@ -190,20 +190,20 @@ SetTags sets Tags field to given value.
 
 ### GetLastCommunicatedAt
 
-`func (o *Device) GetLastCommunicatedAt() time.Time`
+`func (o *Device) GetLastCommunicatedAt() Time`
 
 GetLastCommunicatedAt returns the LastCommunicatedAt field if non-nil, zero value otherwise.
 
 ### GetLastCommunicatedAtOk
 
-`func (o *Device) GetLastCommunicatedAtOk() (*time.Time, bool)`
+`func (o *Device) GetLastCommunicatedAtOk() (*Time, bool)`
 
 GetLastCommunicatedAtOk returns a tuple with the LastCommunicatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastCommunicatedAt
 
-`func (o *Device) SetLastCommunicatedAt(v time.Time)`
+`func (o *Device) SetLastCommunicatedAt(v Time)`
 
 SetLastCommunicatedAt sets LastCommunicatedAt field to given value.
 
@@ -270,20 +270,20 @@ SetLauncherVersion sets LauncherVersion field to given value.
 
 ### GetEnrollmentDate
 
-`func (o *Device) GetEnrollmentDate() time.Time`
+`func (o *Device) GetEnrollmentDate() Time`
 
 GetEnrollmentDate returns the EnrollmentDate field if non-nil, zero value otherwise.
 
 ### GetEnrollmentDateOk
 
-`func (o *Device) GetEnrollmentDateOk() (*time.Time, bool)`
+`func (o *Device) GetEnrollmentDateOk() (*Time, bool)`
 
 GetEnrollmentDateOk returns a tuple with the EnrollmentDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnrollmentDate
 
-`func (o *Device) SetEnrollmentDate(v time.Time)`
+`func (o *Device) SetEnrollmentDate(v Time)`
 
 SetEnrollmentDate sets EnrollmentDate field to given value.
 
@@ -630,20 +630,20 @@ SetLastLocationLongitude sets LastLocationLongitude field to given value.
 
 ### GetLastLocationAt
 
-`func (o *Device) GetLastLocationAt() time.Time`
+`func (o *Device) GetLastLocationAt() Time`
 
 GetLastLocationAt returns the LastLocationAt field if non-nil, zero value otherwise.
 
 ### GetLastLocationAtOk
 
-`func (o *Device) GetLastLocationAtOk() (*time.Time, bool)`
+`func (o *Device) GetLastLocationAtOk() (*Time, bool)`
 
 GetLastLocationAtOk returns a tuple with the LastLocationAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastLocationAt
 
-`func (o *Device) SetLastLocationAt(v time.Time)`
+`func (o *Device) SetLastLocationAt(v Time)`
 
 SetLastLocationAt sets LastLocationAt field to given value.
 

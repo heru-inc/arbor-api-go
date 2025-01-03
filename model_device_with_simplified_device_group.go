@@ -12,7 +12,6 @@ package arborapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -27,11 +26,11 @@ type DeviceWithSimplifiedDeviceGroup struct {
 	DeviceGroup *SimplifiedDeviceGroup `json:"deviceGroup,omitempty"`
 	Model string `json:"model"`
 	Tags []string `json:"tags"`
-	LastCommunicatedAt time.Time `json:"lastCommunicatedAt"`
+	LastCommunicatedAt Time `json:"lastCommunicatedAt"`
 	IsOnline bool `json:"isOnline"`
 	ClientVersion string `json:"clientVersion"`
 	LauncherVersion string `json:"launcherVersion"`
-	EnrollmentDate time.Time `json:"enrollmentDate"`
+	EnrollmentDate Time `json:"enrollmentDate"`
 	SystemVersion string `json:"systemVersion"`
 	OsVersion string `json:"osVersion"`
 	Ssid string `json:"ssid"`
@@ -49,7 +48,7 @@ type DeviceWithSimplifiedDeviceGroup struct {
 	LinkSpeedMbps int32 `json:"linkSpeedMbps"`
 	LastLocationLatitude float64 `json:"lastLocationLatitude"`
 	LastLocationLongitude float64 `json:"lastLocationLongitude"`
-	LastLocationAt time.Time `json:"lastLocationAt"`
+	LastLocationAt Time `json:"lastLocationAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -59,7 +58,7 @@ type _DeviceWithSimplifiedDeviceGroup DeviceWithSimplifiedDeviceGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeviceWithSimplifiedDeviceGroup(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt time.Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate time.Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt time.Time) *DeviceWithSimplifiedDeviceGroup {
+func NewDeviceWithSimplifiedDeviceGroup(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time) *DeviceWithSimplifiedDeviceGroup {
 	this := DeviceWithSimplifiedDeviceGroup{}
 	this.Id = id
 	this.Title = title
@@ -253,9 +252,9 @@ func (o *DeviceWithSimplifiedDeviceGroup) SetTags(v []string) {
 }
 
 // GetLastCommunicatedAt returns the LastCommunicatedAt field value
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAt() time.Time {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -264,7 +263,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAt() time.Time {
 
 // GetLastCommunicatedAtOk returns a tuple with the LastCommunicatedAt field value
 // and a boolean to check if the value has been set.
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAtOk() (*time.Time, bool) {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -272,7 +271,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastCommunicatedAtOk() (*time.Time,
 }
 
 // SetLastCommunicatedAt sets field value
-func (o *DeviceWithSimplifiedDeviceGroup) SetLastCommunicatedAt(v time.Time) {
+func (o *DeviceWithSimplifiedDeviceGroup) SetLastCommunicatedAt(v Time) {
 	o.LastCommunicatedAt = v
 }
 
@@ -349,9 +348,9 @@ func (o *DeviceWithSimplifiedDeviceGroup) SetLauncherVersion(v string) {
 }
 
 // GetEnrollmentDate returns the EnrollmentDate field value
-func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDate() time.Time {
+func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDate() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -360,7 +359,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDate() time.Time {
 
 // GetEnrollmentDateOk returns a tuple with the EnrollmentDate field value
 // and a boolean to check if the value has been set.
-func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDateOk() (*time.Time, bool) {
+func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDateOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -368,7 +367,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetEnrollmentDateOk() (*time.Time, boo
 }
 
 // SetEnrollmentDate sets field value
-func (o *DeviceWithSimplifiedDeviceGroup) SetEnrollmentDate(v time.Time) {
+func (o *DeviceWithSimplifiedDeviceGroup) SetEnrollmentDate(v Time) {
 	o.EnrollmentDate = v
 }
 
@@ -781,9 +780,9 @@ func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationLongitude(v float64) {
 }
 
 // GetLastLocationAt returns the LastLocationAt field value
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAt() time.Time {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -792,7 +791,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAt() time.Time {
 
 // GetLastLocationAtOk returns a tuple with the LastLocationAt field value
 // and a boolean to check if the value has been set.
-func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAtOk() (*time.Time, bool) {
+func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -800,7 +799,7 @@ func (o *DeviceWithSimplifiedDeviceGroup) GetLastLocationAtOk() (*time.Time, boo
 }
 
 // SetLastLocationAt sets field value
-func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationAt(v time.Time) {
+func (o *DeviceWithSimplifiedDeviceGroup) SetLastLocationAt(v Time) {
 	o.LastLocationAt = v
 }
 

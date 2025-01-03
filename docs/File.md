@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **Location** | **string** |  | 
 **Size** | **string** |  | 
 **Tags** | **[]string** |  | 
-**Added** | **time.Time** |  | 
+**Added** | **Time** |  | 
 
 ## Methods
 
 ### NewFile
 
-`func NewFile(id string, name string, location string, size string, tags []string, added time.Time, ) *File`
+`func NewFile(id string, name string, location string, size string, tags []string, added Time, ) *File`
 
 NewFile instantiates a new File object
 This constructor will assign default values to properties that have it defined,
@@ -132,20 +132,20 @@ SetTags sets Tags field to given value.
 
 ### GetAdded
 
-`func (o *File) GetAdded() time.Time`
+`func (o *File) GetAdded() Time`
 
 GetAdded returns the Added field if non-nil, zero value otherwise.
 
 ### GetAddedOk
 
-`func (o *File) GetAddedOk() (*time.Time, bool)`
+`func (o *File) GetAddedOk() (*Time, bool)`
 
 GetAddedOk returns a tuple with the Added field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdded
 
-`func (o *File) SetAdded(v time.Time)`
+`func (o *File) SetAdded(v Time)`
 
 SetAdded sets Added field to given value.
 

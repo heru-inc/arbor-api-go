@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **Location** | **string** |  | 
 **Size** | **string** |  | 
 **Tags** | **[]string** |  | 
-**Added** | **time.Time** |  | 
+**Added** | **Time** |  | 
 
 ## Methods
 
 ### NewFileWithDeviceIds
 
-`func NewFileWithDeviceIds(deviceIds []string, id string, name string, location string, size string, tags []string, added time.Time, ) *FileWithDeviceIds`
+`func NewFileWithDeviceIds(deviceIds []string, id string, name string, location string, size string, tags []string, added Time, ) *FileWithDeviceIds`
 
 NewFileWithDeviceIds instantiates a new FileWithDeviceIds object
 This constructor will assign default values to properties that have it defined,
@@ -153,20 +153,20 @@ SetTags sets Tags field to given value.
 
 ### GetAdded
 
-`func (o *FileWithDeviceIds) GetAdded() time.Time`
+`func (o *FileWithDeviceIds) GetAdded() Time`
 
 GetAdded returns the Added field if non-nil, zero value otherwise.
 
 ### GetAddedOk
 
-`func (o *FileWithDeviceIds) GetAddedOk() (*time.Time, bool)`
+`func (o *FileWithDeviceIds) GetAddedOk() (*Time, bool)`
 
 GetAddedOk returns a tuple with the Added field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdded
 
-`func (o *FileWithDeviceIds) SetAdded(v time.Time)`
+`func (o *FileWithDeviceIds) SetAdded(v Time)`
 
 SetAdded sets Added field to given value.
 

@@ -12,7 +12,6 @@ package arborapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -27,7 +26,7 @@ type FileWithDeviceIds struct {
 	Location string `json:"location"`
 	Size string `json:"size"`
 	Tags []string `json:"tags"`
-	Added time.Time `json:"added"`
+	Added Time `json:"added"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +36,7 @@ type _FileWithDeviceIds FileWithDeviceIds
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileWithDeviceIds(deviceIds []string, id string, name string, location string, size string, tags []string, added time.Time) *FileWithDeviceIds {
+func NewFileWithDeviceIds(deviceIds []string, id string, name string, location string, size string, tags []string, added Time) *FileWithDeviceIds {
 	this := FileWithDeviceIds{}
 	this.Id = id
 	this.Name = name
@@ -201,9 +200,9 @@ func (o *FileWithDeviceIds) SetTags(v []string) {
 }
 
 // GetAdded returns the Added field value
-func (o *FileWithDeviceIds) GetAdded() time.Time {
+func (o *FileWithDeviceIds) GetAdded() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -212,7 +211,7 @@ func (o *FileWithDeviceIds) GetAdded() time.Time {
 
 // GetAddedOk returns a tuple with the Added field value
 // and a boolean to check if the value has been set.
-func (o *FileWithDeviceIds) GetAddedOk() (*time.Time, bool) {
+func (o *FileWithDeviceIds) GetAddedOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -220,7 +219,7 @@ func (o *FileWithDeviceIds) GetAddedOk() (*time.Time, bool) {
 }
 
 // SetAdded sets field value
-func (o *FileWithDeviceIds) SetAdded(v time.Time) {
+func (o *FileWithDeviceIds) SetAdded(v Time) {
 	o.Added = v
 }
 

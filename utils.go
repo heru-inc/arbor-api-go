@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"time"
+	"strings"
 )
 
 // PtrBool is a helper routine that returns a pointer to given boolean value.
@@ -40,7 +41,7 @@ func PtrFloat64(v float64) *float64 { return &v }
 func PtrString(v string) *string { return &v }
 
 // PtrTime is helper routine that returns a pointer to given Time value.
-func PtrTime(v time.Time) *time.Time { return &v }
+func PtrTime(v Time) *Time { return &v }
 
 type NullableBool struct {
 	value *bool
@@ -295,15 +296,15 @@ func (v *NullableString) UnmarshalJSON(src []byte) error {
 }
 
 type NullableTime struct {
-	value *time.Time
+	value *Time
 	isSet bool
 }
 
-func (v NullableTime) Get() *time.Time {
+func (v NullableTime) Get() *Time {
 	return v.value
 }
 
-func (v *NullableTime) Set(val *time.Time) {
+func (v *NullableTime) Set(val *Time) {
 	v.value = val
 	v.isSet = true
 }
@@ -317,7 +318,7 @@ func (v *NullableTime) Unset() {
 	v.isSet = false
 }
 
-func NewNullableTime(val *time.Time) *NullableTime {
+func NewNullableTime(val *Time) *NullableTime {
 	return &NullableTime{value: val, isSet: true}
 }
 
@@ -358,4 +359,30 @@ func newStrictDecoder(data []byte) *json.Decoder {
 // Prevent trying to import "fmt"
 func reportError(format string, a ...interface{}) error {
 	return fmt.Errorf(format, a...)
+}
+
+type Time struct {
+	time.Time
+}
+
+func (ct *Time) UnmarshalJSON(b []byte) (err error) {
+	acceptableFormats := []string{
+		time.RFC3339,
+		time.DateTime,
+	}
+
+	s := strings.Trim(string(b), "\"")
+    if s == "null" {
+       ct.Time = time.Time{}
+       return
+    }
+
+	for _, format := range acceptableFormats {
+		ct.Time, err = time.Parse(format, s)
+		if err == nil {
+			return
+		}
+	}
+	ct.Time = time.Time{}
+    return
 }

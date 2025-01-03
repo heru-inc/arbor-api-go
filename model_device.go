@@ -12,7 +12,6 @@ package arborapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -27,11 +26,11 @@ type Device struct {
 	DeviceGroup NullableString `json:"deviceGroup,omitempty"`
 	Model string `json:"model"`
 	Tags []string `json:"tags"`
-	LastCommunicatedAt time.Time `json:"lastCommunicatedAt"`
+	LastCommunicatedAt Time `json:"lastCommunicatedAt"`
 	IsOnline bool `json:"isOnline"`
 	ClientVersion string `json:"clientVersion"`
 	LauncherVersion string `json:"launcherVersion"`
-	EnrollmentDate time.Time `json:"enrollmentDate"`
+	EnrollmentDate Time `json:"enrollmentDate"`
 	SystemVersion string `json:"systemVersion"`
 	OsVersion string `json:"osVersion"`
 	Ssid string `json:"ssid"`
@@ -49,7 +48,7 @@ type Device struct {
 	LinkSpeedMbps int32 `json:"linkSpeedMbps"`
 	LastLocationLatitude float64 `json:"lastLocationLatitude"`
 	LastLocationLongitude float64 `json:"lastLocationLongitude"`
-	LastLocationAt time.Time `json:"lastLocationAt"`
+	LastLocationAt Time `json:"lastLocationAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -59,7 +58,7 @@ type _Device Device
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt time.Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate time.Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt time.Time) *Device {
+func NewDevice(id string, title string, serialNumber string, model string, tags []string, lastCommunicatedAt Time, isOnline bool, clientVersion string, launcherVersion string, enrollmentDate Time, systemVersion string, osVersion string, ssid string, macAddress string, randomizedMacAddress string, storageSpaceFreeGb float64, storageSpaceTotalGb float64, batteryHealth string, batteryCharging bool, batteryPercentage int32, batteryTemperatureC int32, ipAddress string, signalStrength int32, frequencyMhz int32, linkSpeedMbps int32, lastLocationLatitude float64, lastLocationLongitude float64, lastLocationAt Time) *Device {
 	this := Device{}
 	this.Id = id
 	this.Title = title
@@ -263,9 +262,9 @@ func (o *Device) SetTags(v []string) {
 }
 
 // GetLastCommunicatedAt returns the LastCommunicatedAt field value
-func (o *Device) GetLastCommunicatedAt() time.Time {
+func (o *Device) GetLastCommunicatedAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -274,7 +273,7 @@ func (o *Device) GetLastCommunicatedAt() time.Time {
 
 // GetLastCommunicatedAtOk returns a tuple with the LastCommunicatedAt field value
 // and a boolean to check if the value has been set.
-func (o *Device) GetLastCommunicatedAtOk() (*time.Time, bool) {
+func (o *Device) GetLastCommunicatedAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -282,7 +281,7 @@ func (o *Device) GetLastCommunicatedAtOk() (*time.Time, bool) {
 }
 
 // SetLastCommunicatedAt sets field value
-func (o *Device) SetLastCommunicatedAt(v time.Time) {
+func (o *Device) SetLastCommunicatedAt(v Time) {
 	o.LastCommunicatedAt = v
 }
 
@@ -359,9 +358,9 @@ func (o *Device) SetLauncherVersion(v string) {
 }
 
 // GetEnrollmentDate returns the EnrollmentDate field value
-func (o *Device) GetEnrollmentDate() time.Time {
+func (o *Device) GetEnrollmentDate() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -370,7 +369,7 @@ func (o *Device) GetEnrollmentDate() time.Time {
 
 // GetEnrollmentDateOk returns a tuple with the EnrollmentDate field value
 // and a boolean to check if the value has been set.
-func (o *Device) GetEnrollmentDateOk() (*time.Time, bool) {
+func (o *Device) GetEnrollmentDateOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -378,7 +377,7 @@ func (o *Device) GetEnrollmentDateOk() (*time.Time, bool) {
 }
 
 // SetEnrollmentDate sets field value
-func (o *Device) SetEnrollmentDate(v time.Time) {
+func (o *Device) SetEnrollmentDate(v Time) {
 	o.EnrollmentDate = v
 }
 
@@ -791,9 +790,9 @@ func (o *Device) SetLastLocationLongitude(v float64) {
 }
 
 // GetLastLocationAt returns the LastLocationAt field value
-func (o *Device) GetLastLocationAt() time.Time {
+func (o *Device) GetLastLocationAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -802,7 +801,7 @@ func (o *Device) GetLastLocationAt() time.Time {
 
 // GetLastLocationAtOk returns a tuple with the LastLocationAt field value
 // and a boolean to check if the value has been set.
-func (o *Device) GetLastLocationAtOk() (*time.Time, bool) {
+func (o *Device) GetLastLocationAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -810,7 +809,7 @@ func (o *Device) GetLastLocationAtOk() (*time.Time, bool) {
 }
 
 // SetLastLocationAt sets field value
-func (o *Device) SetLastLocationAt(v time.Time) {
+func (o *Device) SetLastLocationAt(v Time) {
 	o.LastLocationAt = v
 }
 

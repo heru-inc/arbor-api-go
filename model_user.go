@@ -12,7 +12,6 @@ package arborapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -26,8 +25,8 @@ type User struct {
 	LastName string `json:"lastName"`
 	Email string `json:"email"`
 	OrganizationRole OrganizationRole `json:"organizationRole"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	CreatedAt Time `json:"createdAt"`
+	UpdatedAt Time `json:"updatedAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,7 +36,7 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id string, firstName string, lastName string, email string, organizationRole OrganizationRole, createdAt time.Time, updatedAt time.Time) *User {
+func NewUser(id string, firstName string, lastName string, email string, organizationRole OrganizationRole, createdAt Time, updatedAt Time) *User {
 	this := User{}
 	this.Id = id
 	this.FirstName = firstName
@@ -178,9 +177,9 @@ func (o *User) SetOrganizationRole(v OrganizationRole) {
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *User) GetCreatedAt() time.Time {
+func (o *User) GetCreatedAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -189,7 +188,7 @@ func (o *User) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *User) GetCreatedAtOk() (*time.Time, bool) {
+func (o *User) GetCreatedAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -197,14 +196,14 @@ func (o *User) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *User) SetCreatedAt(v time.Time) {
+func (o *User) SetCreatedAt(v Time) {
 	o.CreatedAt = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *User) GetUpdatedAt() time.Time {
+func (o *User) GetUpdatedAt() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -213,7 +212,7 @@ func (o *User) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *User) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *User) GetUpdatedAtOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -221,7 +220,7 @@ func (o *User) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // SetUpdatedAt sets field value
-func (o *User) SetUpdatedAt(v time.Time) {
+func (o *User) SetUpdatedAt(v Time) {
 	o.UpdatedAt = v
 }
 

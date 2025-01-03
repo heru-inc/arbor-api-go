@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Version** | **string** |  | 
 **Code** | Pointer to **NullableInt32** |  | [optional] 
 **Size** | Pointer to **NullableString** |  | [optional] 
-**Added** | **time.Time** |  | 
+**Added** | **Time** |  | 
 **Status** | [**AppVersionStatus**](AppVersionStatus.md) |  | 
 **DownloadUrl** | Pointer to **NullableString** |  | [optional] 
 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewAppVersion
 
-`func NewAppVersion(id string, version string, added time.Time, status AppVersionStatus, ) *AppVersion`
+`func NewAppVersion(id string, version string, added Time, status AppVersionStatus, ) *AppVersion`
 
 NewAppVersion instantiates a new AppVersion object
 This constructor will assign default values to properties that have it defined,
@@ -143,20 +143,20 @@ HasSize returns a boolean if a field has been set.
 UnsetSize ensures that no value is present for Size, not even an explicit nil
 ### GetAdded
 
-`func (o *AppVersion) GetAdded() time.Time`
+`func (o *AppVersion) GetAdded() Time`
 
 GetAdded returns the Added field if non-nil, zero value otherwise.
 
 ### GetAddedOk
 
-`func (o *AppVersion) GetAddedOk() (*time.Time, bool)`
+`func (o *AppVersion) GetAddedOk() (*Time, bool)`
 
 GetAddedOk returns a tuple with the Added field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdded
 
-`func (o *AppVersion) SetAdded(v time.Time)`
+`func (o *AppVersion) SetAdded(v Time)`
 
 SetAdded sets Added field to given value.
 

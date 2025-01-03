@@ -12,7 +12,6 @@ package arborapi
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 
@@ -25,7 +24,7 @@ type AppVersion struct {
 	Version string `json:"version"`
 	Code NullableInt32 `json:"code,omitempty"`
 	Size NullableString `json:"size,omitempty"`
-	Added time.Time `json:"added"`
+	Added Time `json:"added"`
 	Status AppVersionStatus `json:"status"`
 	DownloadUrl NullableString `json:"downloadUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -37,7 +36,7 @@ type _AppVersion AppVersion
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAppVersion(id string, version string, added time.Time, status AppVersionStatus) *AppVersion {
+func NewAppVersion(id string, version string, added Time, status AppVersionStatus) *AppVersion {
 	this := AppVersion{}
 	this.Id = id
 	this.Version = version
@@ -187,9 +186,9 @@ func (o *AppVersion) UnsetSize() {
 }
 
 // GetAdded returns the Added field value
-func (o *AppVersion) GetAdded() time.Time {
+func (o *AppVersion) GetAdded() Time {
 	if o == nil {
-		var ret time.Time
+		var ret Time
 		return ret
 	}
 
@@ -198,7 +197,7 @@ func (o *AppVersion) GetAdded() time.Time {
 
 // GetAddedOk returns a tuple with the Added field value
 // and a boolean to check if the value has been set.
-func (o *AppVersion) GetAddedOk() (*time.Time, bool) {
+func (o *AppVersion) GetAddedOk() (*Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,7 +205,7 @@ func (o *AppVersion) GetAddedOk() (*time.Time, bool) {
 }
 
 // SetAdded sets field value
-func (o *AppVersion) SetAdded(v time.Time) {
+func (o *AppVersion) SetAdded(v Time) {
 	o.Added = v
 }
 
