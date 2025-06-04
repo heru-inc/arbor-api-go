@@ -4,14 +4,14 @@ All URIs are relative to *https://api.xrdm.app/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeviceModelsDeviceModel**](DeviceModelsAPI.md#DeviceModelsDeviceModel) | **Get** /device-models/{deviceModelId} | 
-[**DeviceModelsDeviceModels**](DeviceModelsAPI.md#DeviceModelsDeviceModels) | **Get** /device-models | 
+[**GetDeviceModel**](DeviceModelsAPI.md#GetDeviceModel) | **Get** /device-models/{deviceModelId} | 
+[**GetDeviceModels**](DeviceModelsAPI.md#GetDeviceModels) | **Get** /device-models | 
 
 
 
-## DeviceModelsDeviceModel
+## GetDeviceModel
 
-> DeviceModel DeviceModelsDeviceModel(ctx, deviceModelId).Execute()
+> GetApps200ResponseDataInnerDeviceModelsInner GetDeviceModel(ctx, deviceModelId).Execute()
 
 
 
@@ -30,17 +30,17 @@ import (
 )
 
 func main() {
-	deviceModelId := "660c96fc-8775-49ae-9bf0-863c37cf528f" // string | 
+	deviceModelId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of a device model.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DeviceModelsAPI.DeviceModelsDeviceModel(context.Background(), deviceModelId).Execute()
+	resp, r, err := apiClient.DeviceModelsAPI.GetDeviceModel(context.Background(), deviceModelId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DeviceModelsAPI.DeviceModelsDeviceModel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DeviceModelsAPI.GetDeviceModel``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeviceModelsDeviceModel`: DeviceModel
-	fmt.Fprintf(os.Stdout, "Response from `DeviceModelsAPI.DeviceModelsDeviceModel`: %v\n", resp)
+	// response from `GetDeviceModel`: GetApps200ResponseDataInnerDeviceModelsInner
+	fmt.Fprintf(os.Stdout, "Response from `DeviceModelsAPI.GetDeviceModel`: %v\n", resp)
 }
 ```
 
@@ -50,11 +50,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**deviceModelId** | **string** |  | 
+**deviceModelId** | **string** | The ID of a device model. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeviceModelsDeviceModelRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetDeviceModelRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DeviceModel**](DeviceModel.md)
+[**GetApps200ResponseDataInnerDeviceModelsInner**](GetApps200ResponseDataInnerDeviceModelsInner.md)
 
 ### Authorization
 
@@ -79,9 +79,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeviceModelsDeviceModels
+## GetDeviceModels
 
-> DeviceModelsResponse DeviceModelsDeviceModels(ctx).PerPage(perPage).Page(page).Execute()
+> GetDeviceModels200Response GetDeviceModels(ctx).PerPage(perPage).Page(page).Execute()
 
 
 
@@ -100,18 +100,18 @@ import (
 )
 
 func main() {
-	perPage := int32(2) // int32 |  (optional)
-	page := int32(1) // int32 |  (optional)
+	perPage := int32(56) // int32 | The number of items to return per page. (optional) (default to 10)
+	page := int32(56) // int32 | The page number to return. (optional) (default to 1)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DeviceModelsAPI.DeviceModelsDeviceModels(context.Background()).PerPage(perPage).Page(page).Execute()
+	resp, r, err := apiClient.DeviceModelsAPI.GetDeviceModels(context.Background()).PerPage(perPage).Page(page).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DeviceModelsAPI.DeviceModelsDeviceModels``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DeviceModelsAPI.GetDeviceModels``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeviceModelsDeviceModels`: DeviceModelsResponse
-	fmt.Fprintf(os.Stdout, "Response from `DeviceModelsAPI.DeviceModelsDeviceModels`: %v\n", resp)
+	// response from `GetDeviceModels`: GetDeviceModels200Response
+	fmt.Fprintf(os.Stdout, "Response from `DeviceModelsAPI.GetDeviceModels`: %v\n", resp)
 }
 ```
 
@@ -121,17 +121,17 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeviceModelsDeviceModelsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetDeviceModelsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **perPage** | **int32** |  | 
- **page** | **int32** |  | 
+ **perPage** | **int32** | The number of items to return per page. | [default to 10]
+ **page** | **int32** | The page number to return. | [default to 1]
 
 ### Return type
 
-[**DeviceModelsResponse**](DeviceModelsResponse.md)
+[**GetDeviceModels200Response**](GetDeviceModels200Response.md)
 
 ### Authorization
 

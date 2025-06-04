@@ -4,13 +4,13 @@ All URIs are relative to *https://api.xrdm.app/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**APIInfoInfo**](APIInfoAPI.md#APIInfoInfo) | **Get** / | 
+[**GetApiInfo**](APIInfoAPI.md#GetApiInfo) | **Get** / | 
 
 
 
-## APIInfoInfo
+## GetApiInfo
 
-> RootResponse APIInfoInfo(ctx).Execute()
+> GetApiInfo200Response GetApiInfo(ctx).Execute()
 
 
 
@@ -32,13 +32,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.APIInfoAPI.APIInfoInfo(context.Background()).Execute()
+	resp, r, err := apiClient.APIInfoAPI.GetApiInfo(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `APIInfoAPI.APIInfoInfo``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `APIInfoAPI.GetApiInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `APIInfoInfo`: RootResponse
-	fmt.Fprintf(os.Stdout, "Response from `APIInfoAPI.APIInfoInfo`: %v\n", resp)
+	// response from `GetApiInfo`: GetApiInfo200Response
+	fmt.Fprintf(os.Stdout, "Response from `APIInfoAPI.GetApiInfo`: %v\n", resp)
 }
 ```
 
@@ -48,12 +48,12 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAPIInfoInfoRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetApiInfoRequest struct via the builder pattern
 
 
 ### Return type
 
-[**RootResponse**](RootResponse.md)
+[**GetApiInfo200Response**](GetApiInfo200Response.md)
 
 ### Authorization
 
